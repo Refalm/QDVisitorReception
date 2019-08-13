@@ -6,6 +6,16 @@
 body
 {
 	font-family:'Georgia',serif;
+	background:#d4d4d4;
+}
+
+table
+{
+	border-collapse:collapse;
+}
+
+form
+{
 	background:#fafafa;
 }
 
@@ -33,7 +43,7 @@ if((isset($_POST['visitorname'])))
 	{
 		if ($whovisitors->num_rows > 0)
 		{
-			echo "<table border=\"1\" cellpadding=\"10\">";
+			echo "<form><fieldset><legend>Search results</legend><table border=\"1\" cellpadding=\"10\">";
 			echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Arrival</th><th></th></tr>";
 
 			while ($row = $whovisitors->fetch_object())
@@ -44,10 +54,10 @@ if((isset($_POST['visitorname'])))
 				echo "<td>" . $row->visitororg . "</td>";
 				echo "<td>" . $row->visitortime . "</td>";
 				echo "<td><abbr title=\"Delete entry\" style=\"text-decoration:none\"><a href=\"delete.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
-				echo "</tr>";
+				echo "</tr></legend></fieldset></form>";
 			}
 
-			echo "</table><div style=\"font-family:sans-serif;position:fixed;right:5px;left:auto;top:auto;bottom:5px;border:1px solid #000000;width:300px;\"><div style=\"background:#0078D7;color:#fff;text-align:center;margin:2px 2px 2px 2px;\">ℹ</div><div style=\"margin:2px 2px 2px 2px;\">Press \"❌\" to delete your entry.</div></div>";
+			echo "</table><div style=\"font-family:sans-serif;position:fixed;right:5px;left:auto;top:auto;bottom:5px;border:1px solid #000000;width:300px;background:#fafafa;\"><div style=\"background:#0078D7;color:#fff;text-align:center;margin:2px 2px 2px 2px;\">ℹ</div><div style=\"margin:2px 2px 2px 2px;\">Press \"❌\" to delete your entry.</div></div>";
 		}
 
 		else
@@ -65,14 +75,11 @@ if((isset($_POST['visitorname'])))
 
 else
 {
-	echo "<form id=\"searchname\" method=\"post\" action=\"" .$_SERVER['PHP_SELF']. "\">
-	<input id=\"visitorname\" name=\"visitorname\" type=\"text\" placeholder=\"Search for your name\" />
-	<input id=\"submitname\" type=\"submit\" value=\"🔎\" /></form><div style=\"font-family:sans-serif;position:fixed;right:5px;left:auto;top:auto;bottom:5px;border:1px solid #000000;width:500px;\"><div style=\"background:#0078D7;color:#fff;text-align:center;margin:2px 2px 2px 2px;\">ℹ</div><div style=\"margin:2px 2px 2px 2px;\">Type your name in the search bar, and hit \"Enter\" or the \"🔎\" button.</div></div>";
+	echo "<form id=\"searchname\" method=\"post\" action=\"" .$_SERVER['PHP_SELF']. "\"><fieldset><legend>Name search</legend><input id=\"visitorname\" name=\"visitorname\" type=\"text\" placeholder=\"Search for your name\" /><input id=\"submitname\" type=\"submit\" value=\"🔎\" /></fieldset></form><div style=\"font-family:sans-serif;position:fixed;right:5px;left:auto;top:auto;bottom:5px;border:1px solid #000000;width:500px;background:#fafafa;\"><div style=\"background:#0078D7;color:#fff;text-align:center;margin:2px 2px 2px 2px;\">ℹ</div><div style=\"margin:2px 2px 2px 2px;\">Type your name in the search bar, and hit \"Enter\" or the \"🔎\" button.</div></div>";
 }
 
 $dbconnection->close();
 ?>
-<br /><br />
-<a href="./index.html" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a>
+<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="./index.html" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
 </body>
 </html>

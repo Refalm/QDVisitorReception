@@ -7,11 +7,34 @@
 body
 {
 	font-family:'Georgia',serif;
+	background:#d4d4d4;
+}
+
+form
+{
 	background:#fafafa;
+}
+
+table, th, td
+{
+	border:1px solid black;
+}
+
+table
+{
+	border-collapse:collapse;
+}
+
+th
+{
+	text-align:left;
 }
 </style>
 </head>
 <body>
+<form>
+<fieldset>
+<legend>Employees present</legend>
 <?php
 include('../configuration.php');
 
@@ -19,21 +42,21 @@ if ($whoemployees = $dbconnection->query("SELECT * FROM employee ORDER BY name A
 {
 	if ($whoemployees->num_rows > 0)
 	{
-		echo "<table border=\"1\" cellpadding=\"10\">";
-		echo "<tr><th>Name</th><th>Present</th></tr>";
+		echo "<table>";
+		echo "<tr style=\"font-size:32px\"><th>Name</th><th>Present</th></tr>";
 
 		while ($row = $whoemployees->fetch_object())
 		{
 			echo "<tr>";
-			echo "<td>" . $row->name . "</td>";
+			echo "<td style=\"padding:2px 2px 2px 2px;font-size:32px;\">" . $row->name . "</td>";
 			if ($row->present == 0)
 			{
-				echo "<td style=\"text-align:center;\"><input type=\"button\" name=\"employee\" value=\"⬜️\" /></td>";
+				echo "<td><input type=\"button\" name=\"itsoffrn\" value=\"⬜️\" style=\"width:100%;height:100%;\" /></td>";
 			}
 			
 			else if ($row->present == 1)
 			{
-				echo "<td style=\"text-align:center;\"><input type=\"button\" name=\"employee\" value=\"☑️\" /></td>";
+				echo "<td><input type=\"button\" name=\"itsonrn\" value=\"☑️\" style=\"width:100%;height:100%;\" /></td>";
 			}
 			echo "</tr>";
 		}
@@ -54,9 +77,10 @@ else
 
 $dbconnection->close();
 ?>
+</fieldset>
+</form>
 
-<br /><br />
-<a href="./index.html" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a>
+<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="./index.html" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
 
 </body>
 </html>
