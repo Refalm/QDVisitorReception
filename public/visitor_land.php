@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+require_once("../configuration.php");
+?><!DOCTYPE html>
 <html>
 <head>
 <title>QDVisitorReception</title>
@@ -26,6 +28,7 @@ button.big
 </style>
 </head>
 <body>
+<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
 
 <!--
  style="margin-left:50px;"
@@ -37,7 +40,7 @@ button.big
 </button>
 </a>
 
-<a href="./visitor_in.html" style="text-decoration:none;">
+<a href="./visitor_in.php" style="text-decoration:none;">
 <button class="big" style="margin-left:50px;">
 <span class="emoji">📥‍</span><br /><br /><span class="tekst">Entering</span>
 </button>
@@ -45,7 +48,7 @@ button.big
 
 <div style="clear:both"></div>
 
-<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="./index.html" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
+<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="." style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
 
 </body>
 </html>

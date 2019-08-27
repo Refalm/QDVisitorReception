@@ -67,6 +67,11 @@ Edit the ```configuration.php``` file to reflect the database, user, and passwor
 
 For extra security, use password protection with the ```.htaccess``` file on the ```reception``` directory, which is described here: http://www.htaccesstools.com/articles/password-protection/
 
+#### Logo
+In ```configuration.php``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
+
+As a guideline, the height shouldn't be higher than 220 pixels, no wider than 100 pixels, and the background should be transparent.
+
 ## Contributing
 Just make some pull request and I'll probably hit the "Merge" button.
 

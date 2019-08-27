@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+require_once('../configuration.php');
+?><!DOCTYPE html>
 <html>
 <head>
 <title>QDVisitorReception</title>
@@ -32,12 +34,11 @@ th
 </style>
 </head>
 <body>
+<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
 <form>
 <fieldset>
 <legend>Employees present</legend>
 <?php
-include('../configuration.php');
-
 if ($whoemployees = $dbconnection->query("SELECT * FROM employee ORDER BY name ASC"))
 {
 	if ($whoemployees->num_rows > 0)
@@ -80,7 +81,7 @@ $dbconnection->close();
 </fieldset>
 </form>
 
-<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="./index.html" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
+<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="." style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
 
 </body>
 </html>

@@ -3,6 +3,7 @@ $servername = "localhost";
 $username = "henk";
 $password = "this is a Password 678%";
 $database = "qdvrdb";
+$logo = "northernpetrol";
 
 $dbconnection = new mysqli($servername, $username, $password, $database);
 
