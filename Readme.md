@@ -26,7 +26,7 @@ You're going to need:
 
 For example, on Debian, you install those like this:
 ```
-apt install -y apache2 php libapache2-mod-php php-mysql mariadb-server mariadb-client mysql_secure_installation git
+apt install -y apache2 php mariadb-server mariadb-client libapache2-mod-php php-mysql git && mysql_secure_installation 
 ```
 
 The setup should work on CentOS, Arch, or even Windows too, but I couldn't be bothered to test that hypothesis.

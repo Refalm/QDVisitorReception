@@ -43,21 +43,21 @@ if ($whoemployees = $dbconnection->query("SELECT * FROM employee ORDER BY name A
 {
 	if ($whoemployees->num_rows > 0)
 	{
-		echo "<table>";
-		echo "<tr style=\"font-size:32px\"><th>Name</th><th>Present</th></tr>";
+		echo "<table style=\"padding:0px 0px 0px 0px;\">";
+		echo "<tr style=\"font-size:32px;padding:0px 0px 0px 0px;\"><th>Name</th><th>Present</th></tr>";
 
 		while ($row = $whoemployees->fetch_object())
 		{
-			echo "<tr>";
-			echo "<td style=\"padding:2px 2px 2px 2px;font-size:32px;\">" . $row->name . "</td>";
+			echo "\n<tr>";
+			echo "<td style=\"padding:0px 0px 0px 0px;font-size:32px;\">" . $row->name . "</td>";
 			if ($row->present == 0)
 			{
-				echo "<td><input type=\"button\" name=\"itsoffrn\" value=\"⬜️\" style=\"width:100%;height:100%;\" /></td>";
+				echo "<td style=\"background:#d4d4d4;text-align:center;\"><input type=\"submit\" name=\"" . $row->id . "\" value=\"🔲 NO\" style=\"border:0px;-webkit-appearance:none;width:100%;height:38px;background:#d4d4d4;color:#0e141f;\" /></td>";
 			}
 			
 			else if ($row->present == 1)
 			{
-				echo "<td><input type=\"button\" name=\"itsonrn\" value=\"☑️\" style=\"width:100%;height:100%;\" /></td>";
+				echo "<td style=\"background:#3689e6;text-align:center;\"><input type=\"submit\" name=\"" . $row->id . "\" value=\"🔳 YES\" style=\"border:0px;-webkit-appearance:none;width:100%;height:38px;background:#3689e6;color:#fafafa;\" /></td>";
 			}
 			echo "</tr>";
 		}
