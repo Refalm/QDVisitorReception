@@ -35,7 +35,7 @@ th
 </head>
 <body>
 <img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
-<form>
+<form method="post" action="employee_proc.php">
 <fieldset>
 <legend>Employees present</legend>
 <?php
