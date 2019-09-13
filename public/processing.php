@@ -14,7 +14,7 @@ if((isset($_POST['visitorname'])) && (isset($_POST['visitormail'])) && (isset($_
 	{
 		$insert->execute();
 		$insert->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.html\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😺</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">Your name has been written in the visitor list, $visitorname!</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.php\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😺</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">Your name has been written in the visitor list, $visitorname!</span>";
 	}
 	else
 	{
