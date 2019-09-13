@@ -29,11 +29,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			}
 		}
 	}
+
+echo "<meta http-equiv=\"refresh\" content=\"0; URL=./employee.php\">";
 }
 
 else
 {
-	echo "<style>body { background:#ed5353; }</style><span style=\"font-size:128px\">😿</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">Computer says no.</span>";
+	echo "<style>body { background:#ed5353; }</style><span style=\"font-size:128px\">😿</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">Computer says no.</span><div style=\"position:fixed;left:0px;bottom:0px;top:auto;right:auto;\"><a href=\".\" style=\"text-decoration:none;\"><button style=\"font-size:24px;cursor:pointer;\">⬅️ Back</button></a></div>";
 }
 ?>
-<meta http-equiv="refresh" content="0; URL=./employee.php">
