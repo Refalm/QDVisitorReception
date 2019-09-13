@@ -9,7 +9,7 @@ if (isset($_GET['visitorname']))
 	{
 		$querysearch->execute();
 		$querysearch->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.html\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😸</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">You've been removed from the visitor list, $visitorname! Thanks for stopping by.</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.php\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😸</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">You've been removed from the visitor list, $visitorname! Thanks for stopping by.</span>";
 	}
 	else
 	{
@@ -19,7 +19,7 @@ if (isset($_GET['visitorname']))
 }
 else
 {
-	header("Location: index.html");
+	header("Location: index.php");
 }
 ?>
 <img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
