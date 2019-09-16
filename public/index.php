@@ -1,5 +1,30 @@
 <?php
 require_once("../configuration.php");
+
+$mysqltime = date("Y-m-d H:i:s");
+$minustwodays = strtotime($mysqltime."- 2 days");
+$mysqltimeminustwodays = date("Y-m-d H:i:s",$minustwodays);
+
+if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime <= '$mysqltimeminustwodays' AND departtime != 0"))
+{
+	if ($whovisitors->num_rows > 0)
+	{
+		while ($row = $whovisitors->fetch_object())
+		{
+			if ($twophonecallsandyouraccountcanbedeled = $dbconnection->prepare("DELETE FROM visitor WHERE visitorname = '" . $row->visitorname . "'"))
+			{
+				$twophonecallsandyouraccountcanbedeled->execute();
+				$twophonecallsandyouraccountcanbedeled->close();
+			}
+			else
+			{
+				echo "🙀<br />" . $dbconnection->error;
+				$dbconnection->close();
+			}
+		}
+	}
+}
+
 ?><!DOCTYPE html>
 <html>
 <head>
