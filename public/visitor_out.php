@@ -39,7 +39,7 @@ if((isset($_POST['visitorname'])))
 {
 	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
 	
-	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' ORDER BY visitortime DESC"))
+	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' ORDER BY arrivetime DESC"))
 	{
 		if ($whovisitors->num_rows > 0)
 		{
@@ -52,7 +52,7 @@ if((isset($_POST['visitorname'])))
 				echo "<td>" . $row->visitorname . "</td>";
 				echo "<td>" . $row->visitormail . "</td>";
 				echo "<td>" . $row->visitororg . "</td>";
-				echo "<td>" . $row->visitortime . "</td>";
+				echo "<td>" . $row->arrivetime . "</td>";
 				echo "<td><abbr title=\"Delete entry\" style=\"text-decoration:none\"><a href=\"delete.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
 				echo "</tr></legend></fieldset></form>";
 			}

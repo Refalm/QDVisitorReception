@@ -15,7 +15,7 @@ body
 <?php
 include('../../configuration.php');
 
-if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY visitortime DESC"))
+if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arrivetime DESC"))
 {
 	if ($whovisitors->num_rows > 0)
 	{
@@ -28,7 +28,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY visitort
 			echo "<td>" . $row->visitorname . "</td>";
 			echo "<td>" . $row->visitormail . "</td>";
 			echo "<td>" . $row->visitororg . "</td>";
-			echo "<td>" . $row->visitortime . "</td>";
+			echo "<td>" . $row->arrivetime . "</td>";
 			echo "<td><abbr title=\"Delete entry\" style=\"text-decoration:none\"><a href=\"delete.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
 			echo "</tr>";
 		}
