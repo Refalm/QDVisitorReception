@@ -42,7 +42,7 @@ CREATE DATABASE `qdvrdb`;
 
 USE `qdvrdb`;
 
-CREATE TABLE `visitor` (`visitorname` varchar(123) NOT NULL, `visitormail` varchar(123) NOT NULL, `visitororg` varchar(123) NOT NULL, `visitorhost` varchar(123) NOT NULL, `arrivetime` datetime NOT NULL DEFAULT, `departtime` datetime NOT NULL DEFAULT) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `visitor` (`visitorname` varchar(123) NOT NULL, `visitormail` varchar(123) NOT NULL, `visitororg` varchar(123) NOT NULL, `visitorhost` varchar(123) NOT NULL, `arrivetime` datetime NOT NULL, `departtime` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `visitor` ADD UNIQUE KEY `visitorname` (`visitorname`);
 
