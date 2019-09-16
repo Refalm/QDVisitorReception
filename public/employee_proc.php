@@ -1,6 +1,8 @@
 <?php
 require_once("../configuration.php");
 
+echo "<body style=\"background:#d4d4d4;\"><img src=\"$logo.png\" alt=\"$logo\" style=\"position:fixed;right:0px;bottom:0px;z-index:-1;\" /><div style=\"position:fixed;left:0px;bottom:0px;top:auto;right:auto;\"><a href=\".\" style=\"text-decoration:none;\"><button style=\"font-size:24px;cursor:pointer;\">⬅️ Back</button></a></div>";
+
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	foreach ($_POST as $name => $value)
@@ -31,6 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	}
 
 echo "<meta http-equiv=\"refresh\" content=\"0; URL=./employee.php\">";
+echo "</body>";
 }
 
 else
