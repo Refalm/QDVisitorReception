@@ -54,7 +54,7 @@ if((isset($_POST['visitorname'])))
 				echo "<td>" . $row->visitororg . "</td>";
 				echo "<td>" . $row->visitorhost . "</td>";
 				echo "<td>" . $row->arrivetime . "</td>";
-				echo "<td><abbr title=\"Checkout\" style=\"text-decoration:none\"><a href=\"visitor_checkout.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">🚪🚶</a></abbr></td>";
+				echo "<td><abbr title=\"Check out\" style=\"text-decoration:none\"><a href=\"visitor_checkout.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">🚪🚶</a></abbr></td>";
 				echo "</tr></legend></fieldset></form>";
 			}
 
