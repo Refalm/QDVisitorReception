@@ -1,15 +1,17 @@
 <?php
 include('../configuration.php');
 
+$mysqltime = date("Y-m-d H:i:s");
+
 if (isset($_GET['visitorname']))
 {
 	$visitorname = mysqli_real_escape_string($dbconnection, $_GET['visitorname']);
 
-	if ($querysearch = $dbconnection->prepare("DELETE FROM visitor WHERE visitorname = '$visitorname'"))
+	if ($querysearch = $dbconnection->prepare("UPDATE visitor SET departtime = '".$mysqltime."' WHERE visitorname = '$visitorname'"))
 	{
 		$querysearch->execute();
 		$querysearch->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.php\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😸</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">You've been removed from the visitor list, $visitorname! Thanks for stopping by.</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.php\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😸</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">You've been checked out, $visitorname! Thanks for stopping by.</span>";
 	}
 	else
 	{

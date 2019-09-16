@@ -43,6 +43,11 @@ input
 		<input name="visitororg" type="text" placeholder="Valve Corporation" required />
 		<br />
 		<br />
+		<label for="visitorhost">Name of employee you're visiting</label>
+		<br />
+		<input name="visitorhost" type="text" placeholder="Henk de Vries" required />
+		<br />
+		<br />
 		<input name="submit" type="submit" value="🖋 Enter" style="font-weight:bold;font-size:24px;cursor:pointer;" />
 	</fieldset>
 </form>

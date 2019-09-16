@@ -36,13 +36,13 @@ button.big
 
 <a href="./visitor_out.php" style="text-decoration:none">
 <button class="big">
-<span class="emoji">📤</span><br /><br /><span class="tekst">Leaving</span>
+<span class="emoji">🚪🚶</span><br /><br /><span class="tekst">Leaving</span>
 </button>
 </a>
 
 <a href="./visitor_in.php" style="text-decoration:none;">
 <button class="big" style="margin-left:50px;">
-<span class="emoji">📥‍</span><br /><br /><span class="tekst">Entering</span>
+<span class="emoji">🏢🚶</span><br /><br /><span class="tekst">Entering</span>
 </button>
 </a>
 

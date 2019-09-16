@@ -20,7 +20,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 	if ($whovisitors->num_rows > 0)
 	{
 		echo "<table border=\"1\" cellpadding=\"10\">";
-		echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Time</th><th></th></tr>";
+		echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Host</th><th>Arrived</th><th>Departed</th><th></th></tr>";
 
 		while ($row = $whovisitors->fetch_object())
 		{
@@ -28,7 +28,9 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 			echo "<td>" . $row->visitorname . "</td>";
 			echo "<td>" . $row->visitormail . "</td>";
 			echo "<td>" . $row->visitororg . "</td>";
+			echo "<td>" . $row->visitorhost . "</td>";
 			echo "<td>" . $row->arrivetime . "</td>";
+			echo "<td>" . $row->departtime . "</td>";
 			echo "<td><abbr title=\"Delete entry\" style=\"text-decoration:none\"><a href=\"delete.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
 			echo "</tr>";
 		}

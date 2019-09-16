@@ -39,12 +39,12 @@ if((isset($_POST['visitorname'])))
 {
 	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
 	
-	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' ORDER BY arrivetime DESC"))
+	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS NULL ORDER BY arrivetime DESC"))
 	{
 		if ($whovisitors->num_rows > 0)
 		{
 			echo "<form><fieldset><legend>Search results</legend><table border=\"1\" cellpadding=\"10\">";
-			echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Arrival</th><th></th></tr>";
+			echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Host</th><th>Arrival</th><th></th></tr>";
 
 			while ($row = $whovisitors->fetch_object())
 			{
@@ -52,19 +52,27 @@ if((isset($_POST['visitorname'])))
 				echo "<td>" . $row->visitorname . "</td>";
 				echo "<td>" . $row->visitormail . "</td>";
 				echo "<td>" . $row->visitororg . "</td>";
+				echo "<td>" . $row->visitorhost . "</td>";
 				echo "<td>" . $row->arrivetime . "</td>";
-				echo "<td><abbr title=\"Delete entry\" style=\"text-decoration:none\"><a href=\"delete.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
+				echo "<td><abbr title=\"Checkout\" style=\"text-decoration:none\"><a href=\"visitor_checkout.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">🚪🚶</a></abbr></td>";
 				echo "</tr></legend></fieldset></form>";
 			}
 
-			echo "</table><div style=\"font-family:sans-serif;position:fixed;right:5px;left:auto;top:auto;bottom:5px;border:1px solid #000000;width:300px;background:#fafafa;\"><div style=\"background:#0078D7;color:#fff;text-align:center;margin:2px 2px 2px 2px;\">ℹ</div><div style=\"margin:2px 2px 2px 2px;\">Press \"❌\" to delete your entry.</div></div>";
+			echo "</table><div style=\"font-family:sans-serif;position:fixed;right:5px;left:auto;top:auto;bottom:5px;border:1px solid #000000;width:300px;background:#fafafa;\"><div style=\"background:#0078D7;color:#fff;text-align:center;margin:2px 2px 2px 2px;\">ℹ</div><div style=\"margin:2px 2px 2px 2px;\">Press \"🚪🚶\" to check out.</div></div>";
+		}
+		
+		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS NOT NULL")) && $outtahere->num_rows > 0)
+		{
+			echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.php\" /><span style=\"font-size:128px\">😹</span><br /><br />You're already checked out, $visitorname! Thanks for stopping by.";
 		}
 
 		else
 		{
-			echo "<span style=\"font-size:128px\">🗇</span><br /><br />Hmmm... couldn't find \"$visitorname\"...";
+			echo "<span style=\"font-size:128px\">🤔</span><br /><br />Hmmm... couldn't find \"$visitorname\"...";
 		}
 	}
+	
+	
 
 	else
 	{

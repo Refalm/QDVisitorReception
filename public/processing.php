@@ -1,16 +1,19 @@
 <?php
 require_once("../configuration.php");
 
+$mysqltime = date("Y-m-d H:i:s");
+
 if((isset($_POST['visitorname'])) && (isset($_POST['visitormail'])) && (isset($_POST['visitororg'])))
 {
 	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
 	$visitormail = mysqli_real_escape_string($dbconnection, $_POST['visitormail']);
 	$visitororg = mysqli_real_escape_string($dbconnection, $_POST['visitororg']);
+	$visitorhost = mysqli_real_escape_string($dbconnection, $_POST['visitorhost']);
 	
 	$checkvisitorname = $_POST['visitorname'];
 	$check = mysqli_query($dbconnection,"SELECT * FROM visitor WHERE visitorname = '".$checkvisitorname."'");
 	
-	if (($insert = $dbconnection->prepare("INSERT INTO visitor (visitorname, visitormail, visitororg) VALUES ('".$visitorname."','".$visitormail."','".$visitororg."')")) && (mysqli_num_rows($check)==0))
+	if (($insert = $dbconnection->prepare("INSERT INTO visitor (visitorname, visitormail, visitororg, visitorhost, arrivetime) VALUES ('".$visitorname."','".$visitormail."','".$visitororg."','".$visitorhost."','".$mysqltime."')")) && (mysqli_num_rows($check)==0))
 	{
 		$insert->execute();
 		$insert->close();
