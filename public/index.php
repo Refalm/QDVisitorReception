@@ -72,5 +72,7 @@ button
 
 <div style="clear:both"></div>
 
+<div style="position:fixed; right:0px; top:0px; left:auto; bottom:auto; font-size:72px;"><a href="./?lang=nl" style="text-decoration-line:none;">🇳🇱</a> <a href="./?lang=en" style="text-decoration-line:none;">🇬🇧</a></div>
+
 </body>
 </html>
