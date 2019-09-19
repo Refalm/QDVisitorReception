@@ -1,25 +1,15 @@
 <?php
-require_once('../configuration.php');
+require_once("../configuration.php");
+require_once("sub/back.php");
 ?><!DOCTYPE html>
 <html>
 <head>
 <title>QDVisitorReception</title>
 <meta charset="UTF-8" /> 
-<style>
-body
-{
-	font-family:sans-serif;
-	background:#d4d4d4;
-}
-
-.centre
-{
-	text-align:center;
-}
-</style>
+<link rel="stylesheet" href="./style.css" />
 </head>
-<body>
-<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
+<body id="context">
+<?php include 'sub/logo.php'; ?>
 <h1>Visitor registration</h1>
 We process the data below for the proper handling of calamities and we will store this data for a maximum of two days:
 <ul>
@@ -35,10 +25,10 @@ We process the data below for the proper handling of calamities and we will stor
 	<tr><th></th><th></th></tr>
 	<tr><td class="centre">📷</td><td>Photography, filming, and/or creating audio recordings, is prohibited without written permission from management.</td></tr>
 	<tr><td class="centre">⚡</td><td>When entering an ESD zone, you must follow instructions given by staff.</td></tr>
-	<tr><td class="centre">🚶</td><td>Visitors are not allowed to wander the premises by themselves.</td></tr>
+	<tr><td class="centre">🚶🏼</td><td>Visitors are not allowed to wander the premises by themselves.</td></tr>
 </table>
 <hr />
-<a href="./visitor_inn.php" style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;background:#206b00;color:#fafafa;">✅ Accept</button></a>
-<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="." style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
+<a href="./visitor_inn.php" class="nodecoration"><button class="accept">✅ Accept</button></a>
+<?php echo backurl("."); ?>
 </body>
 </html>

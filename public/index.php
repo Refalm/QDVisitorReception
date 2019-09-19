@@ -30,49 +30,26 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 <head>
 <title>QDVisitorReception</title>
 <meta charset="UTF-8" />
-<style>
-body
-{
-	background:#95a3ab;
-}
-
-button
-{
-	cursor:pointer;width:400px;height:400px;float:left;text-align:center;
-}
-
-.emoji
-{
-	font-size:128px;
-}
-
-.tekst
-{
-	font-size:72px;
-}
-</style>
+<link rel="stylesheet" href="./style.css" />
 </head>
-<body>
-<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
+<body id="landing">
+<?php include 'sub/logo.php'; ?>
 
-<a href="./employee.php" style="text-decoration:none;">
-	<button>
-		<span class="emoji">👨‍💻</span><br /><br /><span class="tekst">Employee</span>
+<a href="./employee.php" class="nodecoration">
+	<button class="big">
+		<span class="bigfont">👨🏼‍💻</span><br /><br /><span class="tekst">Employee</span>
 	</button>
 </a>
 
-<!--
- style="margin-left:50px;"
--->
-<a href="./visitor_land.php" style="text-decoration:none;">
-	<button style="margin-left:50px;">
-		<span class="emoji">🧝‍</span><br /><br /><span class="tekst">Visitor</span>
+<a href="./visitor_land.php" class="nodecoration">
+	<button class="big spacing">
+		<span class="bigfont">🚶🏼‍</span><br /><br /><span class="tekst">Visitor</span>
 	</button>
 </a>
 
-<div style="clear:both"></div>
+<div class="clear_both"></div>
 
-<div style="position:fixed; right:0px; top:0px; left:auto; bottom:auto; font-size:72px;"><a href="./?lang=nl" style="text-decoration-line:none;">🇳🇱</a> <a href="./?lang=en" style="text-decoration-line:none;">🇬🇧</a></div>
+<div id="taal"><a href="./?lang=nl" class="nodecoration"><img src="./1F1F3-1F1F1.png" alt="🇳🇱" /></a> <a href="./?lang=en" class="nodecoration"><img src="./1F1EC-1F1E7.png" alt="🇬🇧"/ ></a></div>
 
 </body>
 </html>

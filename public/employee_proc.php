@@ -1,10 +1,20 @@
 <?php
 require_once("../configuration.php");
-
-echo "<body style=\"background:#d4d4d4;\"><img src=\"$logo.png\" alt=\"$logo\" style=\"position:fixed;right:0px;bottom:0px;z-index:-1;\" /><div style=\"position:fixed;left:0px;bottom:0px;top:auto;right:auto;\"><a href=\".\" style=\"text-decoration:none;\"><button style=\"font-size:24px;cursor:pointer;\">⬅️ Back</button></a></div>";
-
+require_once("sub/back.php");
+?><!DOCTYPE html>
+<html>
+<head>
+<title>QDVisitorReception</title>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<?php
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+	echo "<body id=\"context\">";
+	echo backurl(".");
+	include 'sub/logo.php';
+	
 	foreach ($_POST as $name => $value)
 	{
 		if ($whoemployees = $dbconnection->query("SELECT * FROM employee WHERE id = $name"))
@@ -38,6 +48,10 @@ echo "</body>";
 
 else
 {
-	echo "<style>body { background:#ed5353; }</style><span style=\"font-size:128px\">😿</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">Computer says no.</span><div style=\"position:fixed;left:0px;bottom:0px;top:auto;right:auto;\"><a href=\".\" style=\"text-decoration:none;\"><button style=\"font-size:24px;cursor:pointer;\">⬅️ Back</button></a></div>";
+	echo "<body id=\"error\">";
+	echo backurl(".");
+	echo "<span class=\"bigfont\">😿</span>\n<br /><br /><span class=\"tekst_header\">Computer says no.</span>";
+	echo "</body>";
 }
 ?>
+</html>

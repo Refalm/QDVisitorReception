@@ -1,54 +1,31 @@
 <?php
 require_once("../configuration.php");
+require_once("sub/back.php");
 ?><!DOCTYPE html>
 <html>
 <head>
 <title>QDVisitorReception</title>
 <meta charset="UTF-8" />
-<style>
-body
-{
-	background:#95a3ab;
-}
-
-button.big
-{
-	cursor:pointer;width:400px;height:400px;float:left;text-align:center;
-}
-
-.emoji
-{
-	font-size:128px;
-}
-
-.tekst
-{
-	font-size:72px;
-}
-</style>
+<link rel="stylesheet" href="./style.css" />
 </head>
-<body>
-<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
+<body id="landing">
+<?php include 'sub/logo.php'; ?>
 
-<!--
- style="margin-left:50px;"
--->
-
-<a href="./visitor_out.php" style="text-decoration:none">
+<a href="./visitor_out.php" class="nodecoration">
 <button class="big">
-<span class="emoji">🚪🚶</span><br /><br /><span class="tekst">Leaving</span>
+<span class="bigfont">🚪🚶🏼</span><br /><br /><span class="tekst">Leaving</span>
 </button>
 </a>
 
-<a href="./visitor_in.php" style="text-decoration:none;">
-<button class="big" style="margin-left:50px;">
-<span class="emoji">🏢🚶</span><br /><br /><span class="tekst">Entering</span>
+<a href="./visitor_in.php" class="nodecoration">
+<button class="big spacing">
+<span class="bigfont">🏢🚶🏼</span><br /><br /><span class="tekst">Entering</span>
 </button>
 </a>
 
-<div style="clear:both"></div>
+<div class="clear_both"></div>
 
-<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="." style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
+<?php echo backurl("."); ?>
 
 </body>
 </html>

@@ -1,8 +1,15 @@
 <?php
-include('../configuration.php');
+require_once("../configuration.php");
+require_once("sub/back.php");
 
 $mysqltime = date("Y-m-d H:i:s");
-
+?><!DOCTYPE html>
+<html>
+<head>
+<title>QDVisitorReception</title>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="./style.css" />
+<?php
 if (isset($_GET['visitorname']))
 {
 	$visitorname = mysqli_real_escape_string($dbconnection, $_GET['visitorname']);
@@ -11,11 +18,12 @@ if (isset($_GET['visitorname']))
 	{
 		$querysearch->execute();
 		$querysearch->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=./index.php\" /><style>body { background:#9bdb4d; }</style><span style=\"font-size:128px\">😸</span>\n<br /><br /><span style=\"font=family:'Georgia',serif;font-size:48px;\">You've been checked out, $visitorname! Thanks for stopping by.</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"success\"><span class=\"bigfont\">😸</span>\n<br /><br /><span class=\"tekst_header\">You've been checked out, $visitorname! Thanks for stopping by.</span>";
+		include 'sub/logo.php';
 	}
 	else
 	{
-		echo "🙀 Connection to the database failed or something, get the sysadmin. Show them this:<br /><br />" . $dbconnection->error;
+		echo "<body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">Connection to the database failed or something, get the sysadmin.</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
 		$dbconnection->close();
 	}
 }
@@ -23,6 +31,9 @@ else
 {
 	header("Location: index.php");
 }
+
+echo backurl(".");
+
 ?>
-<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" style="position:fixed;right:0px;bottom:0px;z-index:-1;" />
-<div style="position:fixed;left:0px;bottom:0px;top:auto;right:auto;"><a href="." style="text-decoration:none;"><button style="font-size:24px;cursor:pointer;">⬅️ Back</button></a></div>
+</body>
+</html>
