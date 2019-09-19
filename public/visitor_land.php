@@ -1,6 +1,7 @@
 <?php
 require_once("../configuration.php");
 require_once("sub/back.php");
+require_once("sub/taal.php");
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +14,13 @@ require_once("sub/back.php");
 
 <a href="./visitor_out.php" class="nodecoration">
 <button class="big">
-<span class="bigfont">🚪🚶🏼</span><br /><br /><span class="tekst">Leaving</span>
+<span class="bigfont">🚪🚶🏼</span><br /><br /><span class="tekst"><?php echo $taal['Leaving']; ?></span>
 </button>
 </a>
 
 <a href="./visitor_in.php" class="nodecoration">
 <button class="big spacing">
-<span class="bigfont">🏢🚶🏼</span><br /><br /><span class="tekst">Entering</span>
+<span class="bigfont">🏢🚶🏼</span><br /><br /><span class="tekst"><?php echo $taal['Entering']; ?></span>
 </button>
 </a>
 

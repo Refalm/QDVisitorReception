@@ -1,6 +1,7 @@
 <?php
 require_once('../configuration.php');
 require_once("sub/back.php");
+require_once("sub/taal.php");
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +13,14 @@ require_once("sub/back.php");
 <?php include 'sub/logo.php'; ?>
 <form method="post" action="employee_proc.php">
 <fieldset>
-<legend>Employees present</legend>
+<legend><?php echo $taal['Employees_present']; ?></legend>
 <?php
 if ($whoemployees = $dbconnection->query("SELECT * FROM employee ORDER BY name ASC"))
 {
 	if ($whoemployees->num_rows > 0)
 	{
 		echo "<table class=\"lite liteborder\">";
-		echo "<tr class=\"lite\"><th class=\"liteborder\">Name</th><th class=\"liteborder\">Present</th></tr>";
+		echo "<tr class=\"lite\"><th class=\"liteborder\">".$taal['Name']."</th><th class=\"liteborder\">".$taal['Present']."</th></tr>";
 
 		while ($row = $whoemployees->fetch_object())
 		{
@@ -27,12 +28,12 @@ if ($whoemployees = $dbconnection->query("SELECT * FROM employee ORDER BY name A
 			echo "<td class=\"liteborder litename\">" . $row->name . "</td>";
 			if ($row->present == 0)
 			{
-				echo "<td class=\"liteborder no\"><input type=\"submit\" name=\"" . $row->id . "\" value=\"🔲 NO\" class=\"no\" /></td>";
+				echo "<td class=\"liteborder no\"><input type=\"submit\" name=\"" . $row->id . "\" value=\"🔲 ".$taal['NO']."\" class=\"no\" /></td>";
 			}
 			
 			else if ($row->present == 1)
 			{
-				echo "<td class=\"liteborder yes\"><input type=\"submit\" name=\"" . $row->id . "\" value=\"🔳 YES\" class=\"yes\" /></td>";
+				echo "<td class=\"liteborder yes\"><input type=\"submit\" name=\"" . $row->id . "\" value=\"🔳 ".$taal['YES']."\" class=\"yes\" /></td>";
 			}
 			echo "</tr>";
 		}

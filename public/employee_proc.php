@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		if ($whoemployees = $dbconnection->query("SELECT * FROM employee WHERE id = $name"))
 		{
 			
-			if($value == "🔳 YES")
+			if (fnmatch("🔳*", $value))
 			{
 				
 				if($putonaway = $dbconnection->prepare("UPDATE employee SET present = 0 WHERE id = $name"))
@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				}
 			}
 			
-			if($value == "🔲 NO")
+			if (fnmatch("🔲*", $value))
 			{
 				
 				if($putonpresent = $dbconnection->prepare("UPDATE employee SET present = 1 WHERE id = $name"))

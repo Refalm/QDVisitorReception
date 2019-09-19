@@ -1,6 +1,7 @@
 <?php
 require_once("../configuration.php");
 require_once("sub/back.php");
+require_once("sub/taal.php");
 
 $mysqltime = date("Y-m-d H:i:s");
 ?><!DOCTYPE html>
@@ -24,18 +25,18 @@ if((isset($_POST['visitorname'])) && (isset($_POST['visitormail'])) && (isset($_
 	{
 		$insert->execute();
 		$insert->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"success\"><span class=\"bigfont\">😺</span>\n<br /><br /><span class=\"tekst_header\">Your name has been written in the visitor list, $visitorname!</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"success\"><span class=\"bigfont\">😺</span>\n<br /><br /><span class=\"tekst_header\">".$taal['VISITORPROC_YEE'].", $visitorname!</span>";
 	}
 	else
 	{
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\"><span class=\"bigfont\">😼</span>\n<br /><br /><span class=\"tekst_header\">Your entry wasn't added,<br />you're probaby already on the visitor list.</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\"><span class=\"bigfont\">😼</span>\n<br /><br /><span class=\"tekst_header\">".$taal['VISITORPROC_WUT']."</span>";
 	}
 	
 	$dbconnection->close();
 }
 else
 {
-	echo "</head><body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">Connection to the database failed or something, get the sysadmin.</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
+	echo "</head><body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">".$taal['DBERROR']."</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
 	$dbconnection->close();
 }
 

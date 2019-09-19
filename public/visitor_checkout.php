@@ -1,6 +1,7 @@
 <?php
 require_once("../configuration.php");
 require_once("sub/back.php");
+require_once("sub/taal.php");
 
 $mysqltime = date("Y-m-d H:i:s");
 ?><!DOCTYPE html>
@@ -18,12 +19,12 @@ if (isset($_GET['visitorname']))
 	{
 		$querysearch->execute();
 		$querysearch->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"success\"><span class=\"bigfont\">😸</span>\n<br /><br /><span class=\"tekst_header\">You've been checked out, $visitorname! Thanks for stopping by.</span>";
+		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"success\"><span class=\"bigfont\">😸</span>\n<br /><br /><span class=\"tekst_header\">".$taal['VISITOROUT_CHECKEDOUT'].", $visitorname! ".$taal['VISITOROUT_THX']."</span>";
 		include 'sub/logo.php';
 	}
 	else
 	{
-		echo "<body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">Connection to the database failed or something, get the sysadmin.</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
+		echo "</head><body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">".$taal['DBERROR']."</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
 		$dbconnection->close();
 	}
 }
