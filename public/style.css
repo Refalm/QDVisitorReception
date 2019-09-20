@@ -83,6 +83,12 @@ input.widesubmit
 	cursor:pointer;
 }
 
+select#taal
+{
+	/* -webkit-appearance:none; */
+	font-size:24px;
+}
+
 table.readablefont
 {
 	font-size:24px;
@@ -133,7 +139,7 @@ tr.lite
 
 #back
 {
-	position:fixed; left:0px; bottom:0px;
+	position:fixed; left:0px; bottom:0px; z-index:-1;
 }
 
 #info
@@ -159,7 +165,7 @@ tr.lite
 #taal
 {
 	position:fixed; right:0px; top:0px;
-	font-size:72px;
+	font-size:0px;
 }
 
 .centre

@@ -13,6 +13,16 @@ function backurl($url)
 			{
 				echo "<div id=\"back\"><a href=\"$url\" class=\"nodecoration\"><button id=\"back\">⬅️ Terug</button></a></div>";
 			}
+			
+			else if ($_COOKIE["taal"] == "fy")
+			{
+				echo "<div id=\"back\"><a href=\"$url\" class=\"nodecoration\"><button id=\"back\">⬅️ Werom</button></a></div>";
+			}
+			
+			else if ($_COOKIE["taal"] == "de")
+			{
+				echo "<div id=\"back\"><a href=\"$url\" class=\"nodecoration\"><button id=\"back\">⬅️ Zurück</button></a></div>";
+			}
 	}
 
 	else

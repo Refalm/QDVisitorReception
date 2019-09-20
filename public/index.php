@@ -58,19 +58,37 @@ if(isSet($_COOKIE['taal']))
 {
 	if ($_COOKIE["taal"] == "nl")
 	{
-		echo "<abbr title=\"English\" class=\"nodecoration\"><a href=\"./?taal=en\" class=\"nodecoration\"><img src=\"./1F1EC-1F1E7.png\" alt=\"🇬🇧\" /></a></abbr>";
+		$taalnlset = " selected=\"selected\"";
+		$taalenset = "";
+		$taalfyset = "";
 	}
 
 	else if ($_COOKIE["taal"] == "en")
 	{
-		echo "<abbr title=\"Nederlands\" class=\"nodecoration\"><a href=\"./?taal=nl\" class=\"nodecoration\"><img src=\"./1F1F3-1F1F1.png\" alt=\"🇳🇱\" /></a></abbr>";
+		$taalenset = " selected=\"selected\"";
+		$taalnlset = "";
+		$taalfyset = "";
+	}
+	
+	else if ($_COOKIE["taal"] == "fy")
+	{
+		$taalfyset = " selected=\"selected\"";
+		$taalenset = "";
+		$taalnlset = "";
 	}
 }
 	else
 	{
-		echo "<abbr title=\"Nederlands\" class=\"nodecoration\"><a href=\"./?taal=nl\" class=\"nodecoration\"><img src=\"./1F1F3-1F1F1.png\" alt=\"🇳🇱\" /></a></abbr>";
+		$taalenset = " selected=\"selected\"";
+		$taalnlset = "";
+		$taalfyset = "";
 	}
 ?>
+	<select onchange="location = this.value;" id="taal">
+		<option value="./?taal=en"<?php echo $taalenset; ?>>🇬🇧 English</option>
+		<option value="./?taal=fy"<?php echo $taalfyset; ?>>🏁 Frysk</option>
+		<option value="./?taal=nl"<?php echo $taalnlset; ?>>🇳🇱 Nederlands</option>
+	</select>
 </div>
 
 </body>
