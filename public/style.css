@@ -162,9 +162,23 @@ tr.lite
 	position:fixed; right:0px; bottom:0px; z-index:-1;
 }
 
-#taal
+#taaltaco
 {
 	position:fixed; right:0px; top:0px;
+	height:64px; width:176px;
+	background:#0e141f;
+}
+
+#taalhint
+{
+	/*position:fixed; right:0px; top:0px;*/
+	font-family:sans-serif;
+	color:#fafafa;
+}
+
+#taal
+{
+	/*position:fixed; right:0px; top:16px;*/
 	font-size:0px;
 }
 
