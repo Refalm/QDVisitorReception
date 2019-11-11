@@ -14,12 +14,12 @@ $taal['Employee']				= 'Meiwurker';
 $taal['Entering']				= 'Fier yn';
 $taal['Host']					= 'Gasthear';
 $taal['Leaving']				= 'Gean fuort';
-$taal['Name']					= 'Namme';
+$taal['Name']					= 'Foarnamme en achternamme';
 $taal['Name_search']			= 'Sykje op namme';
 $taal['NO']						= 'NEE';
 $taal['Organisation']			= 'Organisaasje';
 $taal['Present']				= 'Oanwêzich';
-$taal['Search_for_your_name']	= 'Sykje op namme';
+$taal['Search_for_your_name']	= 'Fier jo foar- en achternamme yn';
 $taal['Search_results']			= 'Sykresultaten';
 $taal['Visitor']				= 'Besiker';
 $taal['YES']					= 'JA';
@@ -27,13 +27,13 @@ $taal['YES']					= 'JA';
 $taal['DBERROR']				= 'D\'r is wat mis mei de databank, krije de systeembehearder.';
 
 $taal['INFO_VISITOROUT_PRESS']	= 'Druk op "🚪🚶🏼" om jo te ofmelde.';
-$taal['INFO_VISITOROUT_SEARCH']	= 'Sykje nei jo namme yn \'e sykbalke, en druk op "Enter" of de knop "🔎".';
+$taal['INFO_VISITOROUT_SEARCH']	= 'Typ jo foar- en achternamme yn \'e sykbalke, en druk op "Enter" as de knop "??".';
 
 $taal['INPUT']					= 'Oanmelde';
 $taal['NAME_EMPLOYEE4VISIT']	= 'Namme fan de wurknimmer dy\'t jo besykje';
 
 $taal['VISITORIN_TITLE']		= 'Besikersregistraasje';
-$taal['VISITORIN_HANDLING']		= 'Wy ferwurkje de ûndersteande gegevens foar de goede ôfhanneling fan rampen en wy bewarje maksimaal twa dagen:<ul><li>Namme;</li><li>Organisaasje wêrfoar jo wurkje;</li><li>Datum en tiid fan oankomst en fertrek;</li><li>Ynformaasje oangeande de persoan of ôfdieling dy\'t jo wolle besykje.</li></ul><strong>Jo hawwe it rjocht om beswier te meitsjen tsjin de gegevensferwurking fan boppesteande gegevens, of jo kinne fersykje jo gegevens te wiskjen of te blokkearjen.</strong>';
+$taal['VISITORIN_HANDLING']		= 'Wy ferwurkje de ûndersteande gegevens foar de goede ôfhanneling fan rampen en wy bewarje maksimaal twa dagen:<ul><li>Foarnamme en achternamme;</li><li>Organisaasje wêrfoar jo wurkje;</li><li>Datum en tiid fan oankomst en fertrek;</li><li>Ynformaasje oangeande de persoan of ôfdieling dy\'t jo wolle besykje.</li></ul><strong>Jo hawwe it rjocht om beswier te meitsjen tsjin de gegevensferwurking fan boppesteande gegevens, of jo kinne fersykje jo gegevens te wiskjen of te blokkearjen.</strong>';
 $taal['VISITORIN_RULESTITLE']	= 'Húshâlding regelt besikers';
 $taal['VISITORIN_RULESCAM']		= 'Foto\'s nimme, filmje en/of audio-opnames meitsje is ferbean sûnder skriftlike tastimming fan \'e management.';
 $taal['VISITORIN_RULESESD']		= 'By it ynfieren fan in ESD-feilich gebiet moatte jo de ynstruksjes fan it personiel folgje.';

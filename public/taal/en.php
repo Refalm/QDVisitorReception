@@ -14,12 +14,12 @@ $taal['Employee']				= 'Employee';
 $taal['Entering']				= 'Entering';
 $taal['Host']					= 'Host';
 $taal['Leaving']				= 'Leaving';
-$taal['Name']					= 'Name';
+$taal['Name']					= 'Forename and surname';
 $taal['Name_search']			= 'Name search';
 $taal['NO']						= 'NO';
 $taal['Organisation']			= 'Organisation';
 $taal['Present']				= 'Present';
-$taal['Search_for_your_name']	= 'Search for your name';
+$taal['Search_for_your_name']	= 'Enter your forename and surname';
 $taal['Search_results']			= 'Search results';
 $taal['Visitor']				= 'Visitor';
 $taal['YES']					= 'YES';
@@ -27,13 +27,13 @@ $taal['YES']					= 'YES';
 $taal['DBERROR']				= 'Connection to the database failed or something, get the sysadmin.';
 
 $taal['INFO_VISITOROUT_PRESS']	= 'Press "🚪🚶🏼" to check out.';
-$taal['INFO_VISITOROUT_SEARCH']	= 'Type your name in the search bar, and hit "Enter" or the "🔎" button.';
+$taal['INFO_VISITOROUT_SEARCH']	= 'Type your forename and surname in the search bar, and hit "Enter" or the "🔎" button.';
 
 $taal['INPUT']					= 'Enter';
 $taal['NAME_EMPLOYEE4VISIT']	= 'Name of employee you\'re visiting';
 
 $taal['VISITORIN_TITLE']		= 'Visitor registration';
-$taal['VISITORIN_HANDLING']		= 'We process the data below for the proper handling of calamities and we will store this data for a maximum of two days:<ul><li>Name;</li><li>Organisation you\'re associated with;</li><li>Date and time of arrival and departure;</li><li>Information that relates to the person or department you wish to visit.</li></ul><strong>You have the right to oppose the data processing, and to request the erasure or blocking of your data.</strong>';
+$taal['VISITORIN_HANDLING']		= 'We process the data below for the proper handling of calamities and we will store this data for a maximum of two days:<ul><li>Forename and surname;</li><li>Organisation you\'re associated with;</li><li>Date and time of arrival and departure;</li><li>Information that relates to the person or department you wish to visit.</li></ul><strong>You have the right to oppose the data processing, and to request the erasure or blocking of your data.</strong>';
 $taal['VISITORIN_RULESTITLE']	= 'Rules for visitors';
 $taal['VISITORIN_RULESCAM']		= 'Unless you have written permission from management; no photography, filming, and/or creating audio recordings.';
 $taal['VISITORIN_RULESESD']		= 'When entering an ESD zone, you must follow instructions given by staff.';
