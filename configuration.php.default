@@ -1,10 +1,17 @@
 <?php
+// Fill in your MySQL connection information here
 $servername = "localhost";
 $username = "henk";
 $password = "this is a Password 678%";
 $database = "qdvrdb";
+
+// Name of your logo without .png, place the logo in the "public" directory
 $logo = "northernpetrol";
 
+// Where can users e-mail to remove their data?
+$privacymail = "privacy@northernpetrol.example";
+
+// Don't edit below this line unless you know some PHP
 $dbconnection = new mysqli($servername, $username, $password, $database);
 
 if ($dbconnection->connect_error)

@@ -33,7 +33,7 @@ $taal['INPUT']					= 'Inschrijven';
 $taal['NAME_EMPLOYEE4VISIT']	= 'Naam van medewerker die u bezoekt';
 
 $taal['VISITORIN_TITLE']		= 'Bezoekersregistratie';
-$taal['VISITORIN_HANDLING']		= 'Onderstaande gegevens verwerken wij voor het juist kunnen afhandelen van calamiteiten en bewaren wij maximaal twee dagen:<ul><li>Voornaam en achternaam;</li><li>Organisatie waarvoor u werkzaam bent;</li><li>Datum en tijdstip van aankomst en vertrek;</li><li>Gegevens die betrekking hebben op de persoon of afdeling die u wenst te bezoeken.</li></ul><strong>U hebt het recht om bezwaar te maken tegen de gegevensverwerking van bovengenoemde data, of u kunt verzoeken uw gegevens te wissen of af te schermen.</strong>';
+$taal['VISITORIN_HANDLING']		= 'Onderstaande gegevens verwerken wij voor het juist kunnen afhandelen van calamiteiten en bewaren wij maximaal twee dagen:<ul><li>Voornaam en achternaam;</li><li>Organisatie waarvoor u werkzaam bent;</li><li>Datum en tijdstip van aankomst en vertrek;</li><li>Gegevens die betrekking hebben op de persoon of afdeling die u wenst te bezoeken.</li></ul><strong>U hebt het recht om bezwaar te maken tegen de gegevensverwerking van bovengenoemde data, of u kunt verzoeken uw gegevens te wissen of af te schermen door een e-mail te versturen naar<br />\n' .$privacymail. '</strong>';
 $taal['VISITORIN_RULESTITLE']	= 'Huishoudelijke regels bezoekers';
 $taal['VISITORIN_RULESCAM']		= 'Fotograferen, filmen en/of het maken van geluidsopnamen is zonder schriftelijke toestemming van de directie verboden.';
 $taal['VISITORIN_RULESESD']		= 'Bij het betreden van een ESD veilige ruimte, dient u de instructies van het personeel op te volgen.';
