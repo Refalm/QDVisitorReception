@@ -20,13 +20,14 @@ body#success
 
 button#back
 {
-	font-size:24px;
+	font-size:32px;
 	cursor:pointer;
 }
 
 button.accept
 {
-	font-size:24px;
+	font-size:32px;
+	width:240px; height:80px;
 	cursor:pointer;
 	background:#206b00; color:#fafafa;
 }
@@ -50,12 +51,14 @@ form
 input#submitname
 {
 	font-size:20px;
-	height:40px;
+	height:80px; width:80px;
+	font-size:x-large;
 }
 
 input#visitorname
 {
-	width:80%; height:40px;
+	width:80%; height:80px;
+	font-size:x-large;
 }
 
 input.no
@@ -74,7 +77,8 @@ input.yes
 
 input.wide
 {
-	width:90%; height:40px;
+	width:90%; height:80px;
+	font-size:x-large;
 }
 
 input.widesubmit
