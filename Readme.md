@@ -72,6 +72,10 @@ In ```configuration.php``` you can set the name of the logo you wish to replace 
 
 As a guideline, the height shouldn't be higher than 220 pixels, no wider than 100 pixels, and the background should be transparent.
 
+#### Privacy e-mail address
+In ```configuration.php``` you can set the e-mail address where users can come in contact with your organisation's data protection officer for GDPR related questions and/or "purge me from your memories and databanks" requests.
+If your organisation doesn't have a data protection officer yet, you're all going to EU jail, where you'll be tortured to death by woodworking activities, conjugal visits by hired service people, and cake baking.
+
 ## Contributing
 Just make some pull request and I'll probably hit the "Merge" button.
 
