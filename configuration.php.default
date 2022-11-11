@@ -1,8 +1,8 @@
 <?php
-// Fill in your MySQL connection information here
-$servername = "localhost";
-$username = "henk";
-$password = "this is a Password 678%";
+// Fill in your MariaDB connection information here
+$servername = "mariadb";
+$username = "qdvr";
+$password = "changeme";
 $database = "qdvrdb";
 
 // Name of your logo without .png, place the logo in the "public" directory

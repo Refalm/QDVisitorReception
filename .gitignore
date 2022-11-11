@@ -10,3 +10,15 @@
 
 # macOS
 .DS_Store
+
+# configuration.php
+configuration.php
+
+# Data
+data/
+
+# Env
+.env
+
+# Ignore
+*.ignore

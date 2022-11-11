@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    links:
+      - mariadb
+  mariadb:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: qdvrdb
+      MYSQL_USER: qdvr
+      MYSQL_PASSWORD: changeme
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

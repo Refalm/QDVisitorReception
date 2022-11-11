@@ -21,7 +21,7 @@ if((isset($_POST['visitorname'])) && (isset($_POST['visitormail'])) && (isset($_
 	$checkvisitorname = $_POST['visitorname'];
 	$check = mysqli_query($dbconnection,"SELECT * FROM visitor WHERE visitorname = '".$checkvisitorname."'");
 	
-	if (($insert = $dbconnection->prepare("INSERT INTO visitor (visitorname, visitormail, visitororg, visitorhost, arrivetime) VALUES ('".$visitorname."','".$visitormail."','".$visitororg."','".$visitorhost."','".$mysqltime."')")) && (mysqli_num_rows($check)==0))
+	if (($insert = $dbconnection->prepare("INSERT INTO visitor (visitorname, visitormail, visitororg, visitorhost, arrivetime, departtime) VALUES ('".$visitorname."','".$visitormail."','".$visitororg."','".$visitorhost."','".$mysqltime."','".$mysqltime."')")) && (mysqli_num_rows($check)==0))
 	{
 		$insert->execute();
 		$insert->close();
