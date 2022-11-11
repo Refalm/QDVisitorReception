@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 services:
   php:
     build:
@@ -10,11 +10,8 @@ services:
       - mariadb
   mariadb:
     image: mariadb:10
-    environment:
-      MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: qdvrdb
-      MYSQL_USER: qdvr
-      MYSQL_PASSWORD: changeme
+    env_file:
+      - .env
     ports:
       - 3306:3306
     volumes:

@@ -26,17 +26,18 @@ Require ip 130.89.16.82
 ```
 between the RequireAny tag.
 
-## MariaDB password
-It's a good idea to change the default password for MariaDB first.
-
-In ```docker-compose.yml```, ```init.sql```, and ```configuration.php``` find and replace the string ```changeme```.
-
 ## Install
 You can either use Docker or Classic LAMP.
 
 Which one will you choose?
 
 ### Docker
+Rename ```.env.dist``` to ```.env```.
+
+In ```.env```, change the MySQL root password to something random.
+
+Change the MySQL password called ```changeme```. Also search/replace ```changeme``` to the password you just entered in ```configuration.php``` and ```init.sql```.
+
 Then just run
 ```shell
 docker compose up
@@ -63,6 +64,8 @@ The setup should work on CentOS, Arch, or even Windows too, but I couldn't be bo
 
 #### Installing
 Login as root.
+
+Search/replace the MySQL password called ```changeme``` in ```init.sql``` with something else. Also search/replace ```changeme``` to the password you just entered in ```configuration.php```.
 
 Then you can do:
 ```shell
