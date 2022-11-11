@@ -13,7 +13,7 @@ if((isset($_POST['visitorname'])))
 	echo "</head><body id=\"context\">";
 	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
 	
-	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS '2038-01-19 03:14:07' ORDER BY arrivetime DESC"))
+	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime = '2038-01-19 03:14:07' ORDER BY arrivetime DESC"))
 	{
 		if ($whovisitors->num_rows > 0)
 		{
