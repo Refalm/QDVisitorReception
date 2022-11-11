@@ -3,78 +3,99 @@ A quick and dirty visitor registration system to use on some sort of tablet at t
 
 This thing is written in HTML, CSS, and PHP with the mysqli extension.
 
-## Getting started
+## configuration.php
+Rename the ```configuration.php.default``` file to ```configuration.php```.
+
+## Logo
+In ```configuration.php``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
+
+As a guideline, the height shouldn't be higher than 220 pixels, no wider than 100 pixels, and the background should be transparent.
+
+## Privacy e-mail address
+In ```configuration.php``` you can set the e-mail address where users can come in contact with your organisation's data protection officer for GDPR related questions and/or "purge me from your memories and databanks" requests.
+If your organisation doesn't have a data protection officer yet, you're all going to EU jail, where you'll be tortured to death by woodworking activities, conjugal visits by hired service people, and cake baking.
+
+## Reception page
+The receptionist can visit the /reception page to see current visitors.
+
+It's set to be secured to internal networks only. Just add another IP address in `reception/.htaccess` if you're hosting this internet facing.
+
+So if your buildings' external IP address is 130.89.16.82, just add
+```text
+Require ip 130.89.16.82
+```
+between the RequireAny tag.
+
+## Install
+You can either use Docker or Classic LAMP.
+
+Which one will you choose?
+
+### Docker
+Rename ```.env.dist``` to ```.env```.
+
+In ```.env```, change the MySQL root password to something random.
+
+In ```.env```, change the MySQL password called ```changeme```. Also search/replace ```changeme``` to the same password from ```.env``` in the files ```configuration.php``` and ```init.sql```.
+
+Then just run
+```shell
+docker compose up
+```
+mate.
+
+### Classic LAMP
 There's no hipster framework that gives you dependency hell and fails to install anyway.
 Just git clone in your webserver folder and create a database.
 
-### Prerequisites for client
-The client will need a web browser.
-
-The webinterface should work on the following browsers:
-* Chromium 71 or later (or forks like Brave, Chrome, Edge, Opera, Vivaldi, etc.)
-* Firefox 60 or later
-* Safari 12 or later
-
-Internet Explorer should work too, except for some emoji's not displaying correctly.
-
-### Prerequisites for server
+#### Prerequisites for server
 You're going to need:
-* Some sort of webserver like Apache 2, nginx, or IIS
-* PHP 7 or PHP 5
-* MariaDB or MySQL
+* Apache 2.4 or higher
+* PHP 8
+* MariaDB 10
 * Git client
 
 For example, on Debian, you install those like this:
-```
+```shell
 apt install -y apache2 php mariadb-server mariadb-client libapache2-mod-php php-mysql git && mysql_secure_installation 
 ```
 
 The setup should work on CentOS, Arch, or even Windows too, but I couldn't be bothered to test that hypothesis.
 
-### Installing
-In the MariaDB console, create the database and user.
+#### Installing
+Search/replace the MySQL password called ```changeme``` in the files ```init.sql``` and ```configuration.php``` to something else.
 
-Or use PHPMyAdmin, who am I to judge?
+Login as root.
 
-Here's an example:
-```
-CREATE DATABASE `qdvrdb`;
-
-USE `qdvrdb`;
-
-CREATE TABLE `visitor` (`visitorname` varchar(123) NOT NULL, `visitormail` varchar(123) NOT NULL, `visitororg` varchar(123) NOT NULL, `visitorhost` varchar(123) NOT NULL, `arrivetime` datetime NOT NULL, `departtime` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-ALTER TABLE `visitor` ADD UNIQUE KEY `visitorname` (`visitorname`);
-
-CREATE TABLE `employee` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(128) NOT NULL, `present` bit(1) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-GRANT ALL PRIVILEGES ON qdvrdb.* TO qdvr@localhost IDENTIFIED BY "please change this";
-
-DESCRIBE `visitor`;
-
-DESCRIBE `employee`;
+Then you can do:
+```shell
+mysql < ./init.sql
 ```
 
-If you copy/pasted the above example, at least change the password.
+#### Deployment
+Files in the ```public``` directory are public facing.
 
-### Deployment
-Git clone in the webserver folder. That folder is ```/var/www/html``` on Debian, but it might be somewhere else on your server, so check where it is first.
-Configure your webserver so it points to the ```public``` directory when someone accesses it.
+Edit your Apache config to reflect that situation.
 
-Rename the ```configuration.php.default``` file to ```configuration.php```.
+## Using other platforms
+### Apache
+You can use something else than Apache, but it'll mean you'll have to secure ```/reception``` some other way.
 
-Edit the ```configuration.php``` file to reflect the database, user, and password.
+### PHP 8
+PHP 5 and PHP 7 could probably work fine too, haven't tested that.
 
-For extra security, use password protection with the ```.htaccess``` file on the ```reception``` directory, which is described here: http://www.htaccesstools.com/articles/password-protection/
+### MariaDB
+MySQL or Oracle Datebase will probably work fine.
 
-#### Logo
-In ```configuration.php``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
+You could probably easily convert the database to PostgreSQL, Microsoft SQL, IBM Db2, etc. since it's not that complicated of structure. There aren't even foreign keys or procedures.
 
-As a guideline, the height shouldn't be higher than 220 pixels, no wider than 100 pixels, and the background should be transparent.
+### Linux
+There's no reason why BSD or Windows wouldn't work, I just don't personally use those platforms for hosting usually.
 
-#### Privacy e-mail address
-In ```configuration.php``` you can set the e-mail address where users can come in contact with your organisation's data protection officer for GDPR related questions and/or "purge me from your memories and databanks" requests.
-If your organisation doesn't have a data protection officer yet, you're all going to EU jail, where you'll be tortured to death by woodworking activities, conjugal visits by hired service people, and cake baking.
+### Browser from current year
+If you're still on Internet Explorer, emoji's don't work (which this site heavily uses), and the lay-out looks screwed up.
+
+Chrome, Edge, and Firefox have enterprise editions when you're looking for a corporate wide replacement, all three include buzzwords like LTS MSI GPO SSO.
 
 ## Contributing
 Just make some pull request and I'll probably hit the "Merge" button.
