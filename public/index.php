@@ -7,7 +7,7 @@ $mysqltime = date("Y-m-d H:i:s");
 $minustwodays = strtotime($mysqltime."- 2 days");
 $mysqltimeminustwodays = date("Y-m-d H:i:s",$minustwodays);
 
-if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime <= '$mysqltimeminustwodays' AND departtime != 0"))
+if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime <= '$mysqltimeminustwodays' AND departtime != '2038-01-19'"))
 {
 	if ($whovisitors->num_rows > 0)
 	{

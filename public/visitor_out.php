@@ -13,7 +13,7 @@ if((isset($_POST['visitorname'])))
 	echo "</head><body id=\"context\">";
 	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
 	
-	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS NULL ORDER BY arrivetime DESC"))
+	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS '2038-01-19 03:14:07' ORDER BY arrivetime DESC"))
 	{
 		if ($whovisitors->num_rows > 0)
 		{
@@ -36,7 +36,7 @@ if((isset($_POST['visitorname'])))
 			echo backurl("./visitor_out.php");
 		}
 		
-		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS NOT NULL")) && $outtahere->num_rows > 0)
+		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS NOT '2038-01-19 03:14:07'")) && $outtahere->num_rows > 0)
 		{
 			echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\">";
 			echo "<span class=\"bigfont\">😼</span><br /><br />".$taal['VISITOROUT_ALREADY'].", $visitorname! ".$taal['VISITOROUT_THX']."";
