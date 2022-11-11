@@ -51,7 +51,7 @@ Just git clone in your webserver folder and create a database.
 You're going to need:
 * Apache 2.4 or higher
 * PHP 8
-* MariaDB or MySQL
+* MariaDB 10
 * Git client
 
 For example, on Debian, you install those like this:
