@@ -32,7 +32,7 @@ It's a good idea to change the default password for MariaDB first.
 In ```docker-compose.yml```, ```init.sql```, and ```configuration.php``` find and replace the string ```changeme```.
 
 ## Install
-You can either do Docker or Classic LAMP.
+You can either use Docker or Classic LAMP.
 
 Which one will you choose?
 
@@ -73,6 +73,26 @@ mysql < ./init.sql
 Files in the ```public``` directory are public facing.
 
 Edit your Apache config to reflect that situation.
+
+## Using other platforms
+### Apache
+You can use something else than Apache, but it'll mean you'll have to secure ```/reception``` some other way.
+
+### PHP 8
+PHP 5 and PHP 7 could probably work fine too, haven't tested that.
+
+### MariaDB
+MySQL or Oracle Datebase will probably work fine.
+
+You could probably easily convert the database to PostgreSQL, Microsoft SQL, IBM Db2, etc. since it's not that complicated of structure. There aren't even foreign keys or procedures.
+
+### Linux
+There's no reason why BSD or Windows wouldn't work, I just don't personally use those platforms for hosting usually.
+
+### Browser from current year
+If you're still on Internet Explorer, emoji's don't work (which this site heavily uses), and the lay-out looks screwed up.
+
+Chrome, Edge, and Firefox have enterprise editions when you're looking for a corporate wide replacement, all three include buzzwords like LTS MSI GPO SSO.
 
 ## Contributing
 Just make some pull request and I'll probably hit the "Merge" button.
