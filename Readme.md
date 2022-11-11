@@ -36,7 +36,7 @@ Rename ```.env.dist``` to ```.env```.
 
 In ```.env```, change the MySQL root password to something random.
 
-Change the MySQL password called ```changeme```. Also search/replace ```changeme``` to the password you just entered in ```configuration.php``` and ```init.sql```.
+In ```.env```, change the MySQL password called ```changeme```. Also search/replace ```changeme``` to the same password from ```.env``` in the files ```configuration.php``` and ```init.sql```.
 
 Then just run
 ```shell
@@ -63,9 +63,9 @@ apt install -y apache2 php mariadb-server mariadb-client libapache2-mod-php php-
 The setup should work on CentOS, Arch, or even Windows too, but I couldn't be bothered to test that hypothesis.
 
 #### Installing
-Login as root.
+Search/replace the MySQL password called ```changeme``` in the files ```init.sql``` and ```configuration.php``` to something else.
 
-Search/replace the MySQL password called ```changeme``` in ```init.sql``` with something else. Also search/replace ```changeme``` to the password you just entered in ```configuration.php```.
+Login as root.
 
 Then you can do:
 ```shell
