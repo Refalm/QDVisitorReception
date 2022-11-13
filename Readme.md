@@ -3,16 +3,19 @@ A quick and dirty visitor registration system to use on some sort of tablet at t
 
 This thing is written in HTML, CSS, and PHP with the mysqli extension.
 
-## configuration.php
-Rename the ```configuration.php.default``` file to ```configuration.php```.
+## .env
+Rename ```.env.dist``` to ```.env``` to create the configuration file.
+
+## MariaDB password
+In ```.env```, change the MariaDB password called ```changeme```.
 
 ## Logo
-In ```configuration.php``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
+In ```.env``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
 
 As a guideline, the height shouldn't be higher than 220 pixels, no wider than 100 pixels, and the background should be transparent.
 
 ## Privacy e-mail address
-In ```configuration.php``` you can set the e-mail address where users can come in contact with your organisation's data protection officer for GDPR related questions and/or "purge me from your memories and databanks" requests.
+In ```.env``` you can set the e-mail address where users can come in contact with your organisation's data protection officer for GDPR related questions and/or "purge me from your memories and databanks" requests.
 If your organisation doesn't have a data protection officer yet, you're all going to EU jail, where you'll be tortured to death by woodworking activities, conjugal visits by hired service people, and cake baking.
 
 ## Reception page
@@ -32,50 +35,47 @@ You can either use Docker or Classic LAMP.
 Which one will you choose?
 
 ### Docker
-Rename ```.env.dist``` to ```.env```.
-
-In ```.env```, change the MySQL root password to something random.
-
-In ```.env```, change the MySQL password called ```changeme```. Also search/replace ```changeme``` to the same password from ```.env``` in the files ```configuration.php``` and ```init.sql```.
-
-Then just run
+Just run
 ```shell
 docker compose up
 ```
 mate.
 
 ### Classic LAMP
-There's no hipster framework that gives you dependency hell and fails to install anyway.
-Just git clone in your webserver folder and create a database.
+Git clone in your webserver folder and create a database.
 
 #### Prerequisites for server
 You're going to need:
-* Apache 2.4 or higher
+* Apache 2.4
 * PHP 8
 * MariaDB 10
-* Git client
+* Composer 2
+* Git
 
 For example, on Debian, you install those like this:
 ```shell
-apt install -y apache2 php mariadb-server mariadb-client libapache2-mod-php php-mysql git && mysql_secure_installation 
+apt install -y apache2 php composer mariadb-server mariadb-client libapache2-mod-php php-mysql git && mysql_secure_installation 
 ```
 
-The setup should work on CentOS, Arch, or even Windows too, but I couldn't be bothered to test that hypothesis.
-
 #### Installing
-Search/replace the MySQL password called ```changeme``` in the files ```init.sql``` and ```configuration.php``` to something else.
 
-Login as root.
-
-Then you can do:
+##### dotenv install
+Install dotenv by doing
 ```shell
-mysql < ./init.sql
+composer install
+```
+
+##### Database install
+```shell
+sudo mysql < ./init.sql
+sudo mysql < echo "USE mysql; UPDATE user SET PASSWORD = PASSWORD('$MARIADB_PASSWORD') WHERE user = 'qdvr' AND host = '%'; FLUSH PRIVILEGES;"
 ```
 
 #### Deployment
 Files in the ```public``` directory are public facing.
 
 Edit your Apache config to reflect that situation.
+Make damn sure no one can see the ```.env``` file but you.
 
 ## Using other platforms
 ### Apache
@@ -95,7 +95,7 @@ There's no reason why BSD or Windows wouldn't work, I just don't personally use 
 ### Browser from current year
 If you're still on Internet Explorer, emoji's don't work (which this site heavily uses), and the lay-out looks screwed up.
 
-Chrome, Edge, and Firefox have enterprise editions when you're looking for a corporate wide replacement, all three include buzzwords like LTS MSI GPO SSO.
+Chrome, Edge, and Firefox have enterprise editions when you're looking for a corporate wide replacement, all three include buzzwords like LTS GPO SSO.
 
 ## Contributing
 Just make some pull request and I'll probably hit the "Merge" button.
