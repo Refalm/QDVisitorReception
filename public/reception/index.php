@@ -19,7 +19,6 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 {
 	if ($whovisitors->num_rows > 0)
 	{
-		echo "<form id=\"bezoeker\"><legend>Visitors</legend>";
 		echo "<table border=\"1\" cellpadding=\"10\">";
 		echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Host</th><th>Arrived</th><th>Departed</th><th></th></tr>";
 
@@ -36,7 +35,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 			echo "</tr>";
 		}
 		
-		echo "</table></form>";
+		echo "</table>";
 	}
 
 	else
@@ -48,7 +47,6 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 	{
 		if ($whoemployees->num_rows > 0)
 		{
-			echo "<form id=\"werknemer\" method=\"post\" action=\".\">";
 			echo "<table border=\"1\" cellpadding=\"10\">";
 			echo "<tr><th>Name</th><th></th></tr>";
 	
@@ -61,7 +59,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 			}
 			
 			echo "</table>";
-			echo "<fieldset><legend>Employee</legend><label for=\"employeename\">Employee name</label><br /><input name=\"employeename\" type=\"text\" placeholder=\"Henk de Vries\" required class=\"wide\" /><br /><input name=\"submit\" type=\"submit\" value=\"🖋 New employee\" class=\"wide widesubmit\" /></fieldset></form>";
+			echo "<form id=\"werknemer\" method=\"post\" action=\".\"><fieldset><legend>Employee</legend><label for=\"employeename\">Employee name</label><br /><input name=\"employeename\" type=\"text\" placeholder=\"Henk de Vries\" required class=\"wide\" /><br /><input name=\"submit\" type=\"submit\" value=\"🖋 New employee\" class=\"wide widesubmit\" /></fieldset></form>";
 		}
 	}
 	
