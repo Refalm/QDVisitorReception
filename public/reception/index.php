@@ -65,7 +65,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 			}
 			
 			echo "</table>";
-			echo "<form id=\"werknemer\" method=\"post\" action=\".\"><fieldset><legend>Employee</legend><label for=\"employeename\">Employee name</label><br /><input name=\"employeename\" type=\"text\" placeholder=\"Henk de Vries\" required class=\"wide\" /><br /><input name=\"submit\" type=\"submit\" value=\"🖋 New employee\" class=\"wide widesubmit\" /></fieldset></form>";
+			echo "<form id=\"werknemer\" method=\"post\" action=\".\"><fieldset><legend>New employee</legend><label for=\"employeename\">Employee name</label><br /><input name=\"employeename\" type=\"text\" placeholder=\"Henk de Vries\" required class=\"wide\" /><br /><input name=\"submit\" type=\"submit\" value=\"🖋 New employee\" class=\"wide widesubmit\" /></fieldset></form>";
 		}
 	}
 	
