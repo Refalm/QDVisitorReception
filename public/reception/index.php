@@ -15,6 +15,8 @@ body
 <?php
 include('../../configuration.php');
 
+echo "<h1>Visitors</h1>";
+
 if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arrivetime DESC"))
 {
 	if ($whovisitors->num_rows > 0)
@@ -42,6 +44,10 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 	{
 		echo "<span style=\"font-size:128px\">🗇</span><br /><br />The visitor list is empty...";
 	}
+
+	echo "<br /><hr />";
+
+	echo "<h1>Employees</h1>";
 
 	if ($whoemployees = $dbconnection->query("SELECT * FROM employee ORDER BY name"))
 	{
