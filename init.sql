@@ -10,4 +10,4 @@ ALTER TABLE `visitor` ADD UNIQUE KEY `visitorname` (`visitorname`);
 
 CREATE TABLE `employee` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(128) NOT NULL, `present` bit(1) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-GRANT ALL PRIVILEGES ON qdvrdb.* TO qdvr@localhost IDENTIFIED BY "changeme";
+GRANT ALL PRIVILEGES ON qdvrdb.* TO 'qdvr'@'%';
