@@ -36,7 +36,7 @@ if((isset($_POST['visitorname'])))
 			echo backurl("./visitor_out.php");
 		}
 		
-		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime IS NOT '2038-01-19 03:14:07'")) && $outtahere->num_rows > 0)
+		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime != '2038-01-19 03:14:07'")) && $outtahere->num_rows > 0)
 		{
 			echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\">";
 			echo "<span class=\"bigfont\">😼</span><br /><br />".$taal['VISITOROUT_ALREADY'].", $visitorname! ".$taal['VISITOROUT_THX']."";
