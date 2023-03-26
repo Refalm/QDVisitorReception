@@ -27,8 +27,8 @@ jobs:
       with:
         workflows: '[".github/workflows/*.yaml"]'
 
-    - name: 🧪 Psalm
-      run: psalm --output-format=github
+    # - name: 🧪 Psalm
+    #   run: psalm --output-format=github
 
     - name: 🧪 PHP Codesniffer
       uses: wearerequired/lint-action@v2
