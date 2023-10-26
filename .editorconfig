@@ -14,3 +14,7 @@ ident_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.neon]
+indent_style = space
+ident_size = 4

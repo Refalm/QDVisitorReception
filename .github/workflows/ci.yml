@@ -24,4 +24,4 @@ jobs:
 
     - name: 🧪 PHPStan 0️⃣
       run:
-        phpstan analyse . public -l 0 --no-progress --no-interaction --memory-limit=-1
+        phpstan analyse --memory-limit=-1
