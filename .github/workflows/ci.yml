@@ -14,25 +14,14 @@ jobs:
     - name: 💿 Setup PHP 8.2
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2'
-        tools: vimeo/psalm, phpcs, composer
+        php-version-file: .php-version
+        tools: composer
 
     - name: 💿 Setup PHP dependencies
       run: |
         composer install --prefer-dist --no-progress --no-ansi --no-interaction
         echo "${PWD}/vendor/bin" >> $GITHUB_PATH
 
-    - uses: cschleiden/actions-linter@v1
-      name: 🧪 Workflow
-      with:
-        workflows: '[".github/workflows/*.yaml"]'
-
-    - name: 🧪 Psalm
-      run: psalm --output-format=github
-
-    - name: 🧪 PHP Codesniffer
-      uses: wearerequired/lint-action@v2
-      with:
-        php_codesniffer: true
-        # Optional: Ignore warnings
-        php_codesniffer_args: "-n"
+    - name: 🧪 PHPStan 0️⃣
+      run:
+        phpstan analyse --memory-limit=-1 --no-interaction --no-progress
