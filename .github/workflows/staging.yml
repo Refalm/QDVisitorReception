@@ -6,13 +6,13 @@ on:
 
 jobs:
   sync-staging:
+    name: Update staging branch
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: |
-          git config user.name "GitHub Actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git fetch --prune --unshallow
-          git checkout staging
-          git merge ${{ github.ref }}
-          git push
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: connor-baer/action-sync-branch@main
+        with:
+          branch: staging
+          token: ${{ secrets.PAT_POKEN }}
+          force: false
