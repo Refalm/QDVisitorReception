@@ -4,6 +4,9 @@ on: push
 
 jobs:
   build:
+    permissions:
+      pull-requests: write
+
     runs-on: ubuntu-latest
 
     steps:
