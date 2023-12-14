@@ -15,4 +15,4 @@ jobs:
         with:
           branch: staging
           token: ${{ secrets.PAT_POKEN }}
-          force: false
+          force: true
