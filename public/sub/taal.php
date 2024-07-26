@@ -36,9 +36,13 @@ switch ($taal)
 	case 'nl':
 		$taalbestand = 'nl.php';
 		break;
-		
+
 	case 'fy':
 		$taalbestand = 'fy.php';
+		break;
+
+		case 'ie':
+		$taalbestand = 'ie.php';
 		break;
 
 	case 'de':
