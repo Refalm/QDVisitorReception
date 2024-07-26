@@ -105,6 +105,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 			$taalnlset = "";
 			$taalieset = "";
 		}
+
 		else if ($_COOKIE["taal"] == "ie")
 		{
 			$taalieset = " selected=\"selected\"";
