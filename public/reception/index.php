@@ -22,7 +22,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 	if ($whovisitors->num_rows > 0)
 	{
 		echo "<table border=\"1\" cellpadding=\"10\">";
-		echo "<tr><th>Name</th><th>E-mail</th><th>Organisation</th><th>Host</th><th>Arrived</th><th>Departed</th><th></th></tr>";
+		echo "<tr><th>Name</th><th>E-mail</th><th>Organization</th><th>Host</th><th>Arrived</th><th>Departed</th><th></th></tr>";
 
 		while ($row = $whovisitors->fetch_object())
 		{
@@ -36,7 +36,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 			echo "<td><abbr title=\"Delete entry\" style=\"text-decoration:none\"><a href=\"delete.php?visitorname=" . $row->visitorname . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
 			echo "</tr>";
 		}
-		
+
 		echo "</table>";
 	}
 
@@ -55,7 +55,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 		{
 			echo "<table border=\"1\" cellpadding=\"10\">";
 			echo "<tr><th>Name</th><th></th></tr>";
-	
+
 			while ($row = $whoemployees->fetch_object())
 			{
 				echo "<tr>";
@@ -63,11 +63,11 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 				echo "<td><abbr title=\"Sack employee\" style=\"text-decoration:none\"><a href=\"delete.php?name=" . $row->name . "\" style=\"text-decoration:none\">❌</a></abbr></td>";
 				echo "</tr>";
 			}
-			
+
 			echo "</table>";
 		}
 	}
-	
+
 	else
 	{
 		echo "<span style=\"font-size:128px\">🗇</span><br /><br />The employee list is empty...";
@@ -78,10 +78,10 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor ORDER BY arriveti
 	if((isset($_POST['employeename'])))
 	{
 		$employeename = mysqli_real_escape_string($dbconnection, $_POST['employeename']);
-		
+
 		$checkemployeename = $_POST['employeename'];
 		$check = mysqli_query($dbconnection,"SELECT * FROM employee WHERE name = '".$checkemployeename."'");
-		
+
 		if (($insert = $dbconnection->prepare("INSERT INTO employee (name, present) VALUES ('".$employeename."',0)")) && (mysqli_num_rows($check)==0))
 		{
 			$insert->execute();

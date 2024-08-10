@@ -12,13 +12,13 @@ if((isset($_POST['visitorname'])))
 {
 	echo "</head><body id=\"context\">";
 	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
-	
+
 	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime = '2038-01-19 03:14:07' ORDER BY arrivetime DESC"))
 	{
 		if ($whovisitors->num_rows > 0)
 		{
 			echo "<form><fieldset><legend>".$taal['Search_results']."</legend><table class=\"liteborder regular readablefont\">";
-			echo "<tr><th class=\"liteborder\">".$taal['Name']."</th><th class=\"liteborder\">".$taal['E-mail_address']."</th><th class=\"liteborder\">".$taal['Organisation']."</th><th class=\"liteborder\">".$taal['Host']."</th><th class=\"liteborder\">".$taal['Arrival']."</th><th class=\"liteborder\"></th></tr>";
+			echo "<tr><th class=\"liteborder\">".$taal['Name']."</th><th class=\"liteborder\">".$taal['E-mail_address']."</th><th class=\"liteborder\">".$taal['Organization']."</th><th class=\"liteborder\">".$taal['Host']."</th><th class=\"liteborder\">".$taal['Arrival']."</th><th class=\"liteborder\"></th></tr>";
 
 			while ($row = $whovisitors->fetch_object())
 			{
@@ -35,7 +35,7 @@ if((isset($_POST['visitorname'])))
 			echo "</table><div id=\"info\"><div id=\"info_emoji\">ℹ</div><div id=\"info_content\">".$taal['INFO_VISITOROUT_PRESS']."</div></div>";
 			echo backurl("./visitor_out.php");
 		}
-		
+
 		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime != '2038-01-19 03:14:07'")) && $outtahere->num_rows > 0)
 		{
 			echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\">";
@@ -50,8 +50,8 @@ if((isset($_POST['visitorname'])))
 			echo backurl("./visitor_out.php");
 		}
 	}
-	
-	
+
+
 
 	else
 	{

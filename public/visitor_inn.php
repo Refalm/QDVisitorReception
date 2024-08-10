@@ -24,7 +24,7 @@ require_once("sub/taal.php");
 		<input name="visitormail" type="email" placeholder="gaben@valvesoftware.com" required class="wide" />
 		<br />
 		<br />
-		<label for="visitororg"><?php echo $taal['Organisation']; ?></label>
+		<label for="visitororg"><?php echo $taal['Organization']; ?></label>
 		<br />
 		<input name="visitororg" type="text" placeholder="Valve Corporation" required class="wide" />
 		<br />
