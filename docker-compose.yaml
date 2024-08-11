@@ -10,7 +10,6 @@ services:
       - mariadb
   mariadb:
     image: mariadb:10
-    platform: linux/amd64
     env_file:
       - .env
     ports:
