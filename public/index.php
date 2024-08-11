@@ -88,6 +88,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 			$taalenset = "";
 			$taalfyset = "";
 			$taalieset = "";
+			$taalieset = "";
 		}
 
 		else if ($_COOKIE["taal"] == "en")
@@ -109,9 +110,9 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 		else if ($_COOKIE["taal"] == "ie")
 		{
 			$taalieset = " selected=\"selected\"";
+			$taalenset = "";
 			$taalnlset = "";
 			$taalfyset = "";
-			$taalenset = "";
 		}
 	}
 		else

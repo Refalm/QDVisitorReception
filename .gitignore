@@ -19,3 +19,6 @@ data/
 
 # Ignore
 *.ignore
+
+# PHP
+vendor/**
