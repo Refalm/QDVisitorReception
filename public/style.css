@@ -219,3 +219,48 @@ tr.lite
 {
 	font-family:'Monaco','Consolas',monospace;
 }
+
+#display
+{
+	font-size:72px;
+	font-family:monospace;
+	text-align:center;
+}
+
+#error-message
+{
+	font-size:48px;
+	background:#7a0000;
+	color:#fafafa;
+	font-family:sans-serif;
+	text-align:center;
+}
+
+.numpad
+{
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	max-width: 350px; /* Increased max-width for better spacing */
+	margin: auto;
+	background: #555761 !important;
+	padding: 20px;
+}
+
+.numpad button
+{
+	font-size: 2.5em; /* Increased font size */
+	padding: 40px; /* Increased padding */
+	width:100px;
+	cursor: pointer;
+	background: #7e8087;
+	color: #fafafa;
+	font-family: monospace !important;
+	border-radius: 10px; /* Added border-radius for rounded corners */
+	border: none; /* Remove default border */
+}
+
+.hidden-input
+{
+	display: none !important;
+}

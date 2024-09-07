@@ -13,7 +13,7 @@ if (isset($_POST['pincode'])) {
 	if ($_POST['pincode'] === $employee_pincode) {
 		$_SESSION['authenticated'] = true;
 	} else {
-		$error = "Incorrect pincode.";
+		$error = "😾";
 	}
 }
 
@@ -31,11 +31,44 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 		<form method="post" action="">
 			<fieldset>
 				<legend>Pincode</legend>
-				<?php if (isset($error)) { echo "<p style='color:#7a0000;'>$error</p>"; } ?>
-				<input type="password" name="pincode" id="pincode" class="wide" required /><br /><br />
-				<input type="submit" value="🔓 <?php echo $taal['INPUT']; ?>" class="wide widesubmit" />
+				<div class="numpad">
+					<input type="password" name="pincode" id="pincode" class="hidden-input" required />
+					<?php for ($i = 1; $i <= 9; $i++): ?>
+						<button type="button" onclick="appendNumber(<?php echo $i; ?>)"><?php echo $i; ?></button>
+					<?php endfor; ?>
+					<button type="button" onclick="clearInput()">⌫</button>
+					<button type="button" onclick="appendNumber(0)">0</button>
+					<button type="submit">🔓</button>
+				</div>
+				<div id="display" class="wide"></div>
+				<?php if (isset($error)) { echo "<p id='error-message'>$error</p>"; } ?>
 			</fieldset>
 		</form>
+		<script>
+			function appendNumber(number) {
+				const input = document.getElementById('pincode');
+				const display = document.getElementById('display');
+				input.value += number;
+				display.innerText += '*';
+			}
+
+			function clearInput() {
+				const input = document.getElementById('pincode');
+				const display = document.getElementById('display');
+				input.value = '';
+				display.innerText = '';
+			}
+
+			// Hide error message after 5 seconds
+			window.onload = function() {
+				const errorMessage = document.getElementById('error-message');
+				if (errorMessage) {
+					setTimeout(() => {
+						errorMessage.style.display = 'none';
+					}, 5000);
+				}
+			}
+		</script>
 		<?php
 		echo backurl(".");
 		?>
