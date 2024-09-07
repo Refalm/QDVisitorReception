@@ -4,8 +4,14 @@ A quick and dirty visitor registration system to use on some sort of tablet at t
 
 This thing is written in HTML, CSS, and PHP with the mysqli extension.
 
+## Overview
+
+### Are you an employee or visitor?
+
 ![afbeelding](https://github.com/user-attachments/assets/3fde3578-f8f9-4810-97c8-1f8afb507dc3)
 You'll be greeted by a choice between employee or visitor.
+
+### Employees
 
 ![afbeelding](https://github.com/user-attachments/assets/a8b8006f-eb09-4f99-b121-0592d868c0ef)
 ![afbeelding](https://github.com/user-attachments/assets/162c7aac-7067-403f-bf40-1ea1c36669f8)
@@ -13,6 +19,8 @@ At the employees page, employees can indicate whether they're present or not.
 They can tap the Yes/No button, and it'll change to Yes or No immediately.
 This assumes everyone at the organization is a grown up.
 Before entering the employees page, you must type in a PIN code.
+
+### Visitors
 
 ![afbeelding](https://github.com/user-attachments/assets/923b88c9-ae95-4b0c-9baf-1dec9fb551ed)
 ![afbeelding](https://github.com/user-attachments/assets/688378fb-7646-452c-b0b2-9781d8feb97c)
@@ -25,6 +33,8 @@ Visitors are able to enter their name, and get registered.
 ![afbeelding](https://github.com/user-attachments/assets/3259b70c-8689-4ece-9693-8494bfb02973)
 
 Unless your organization is Hotel California, visitors can actually leave.
+
+### Receptionists
 
 ![afbeelding](https://github.com/user-attachments/assets/1094dd13-13c6-4371-966c-6736a88cfe2b)
 Receptionists can administer visitors and employees on the /reception page.
