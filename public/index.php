@@ -88,6 +88,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 			$taalenset = "";
 			$taalfyset = "";
 			$taalieset = "";
+			$taalieset = "";
 		}
 
 		else if ($_COOKIE["taal"] == "en")
