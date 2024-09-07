@@ -22,11 +22,15 @@ Before entering the employees page, you must type in a PIN code.
 
 ### Visitors
 
+#### Check in
+
 ![afbeelding](https://github.com/user-attachments/assets/923b88c9-ae95-4b0c-9baf-1dec9fb551ed)
 ![afbeelding](https://github.com/user-attachments/assets/688378fb-7646-452c-b0b2-9781d8feb97c)
 ![afbeelding](https://github.com/user-attachments/assets/f19c9c82-fbf9-4470-802e-308a06cf085e)
 ![afbeelding](https://github.com/user-attachments/assets/76cac5b7-5968-474b-b75c-99b4f8db8254)
 Visitors are able to enter their name, and get registered.
+
+#### Check out
 
 ![afbeelding](https://github.com/user-attachments/assets/4047f0cf-32ea-4086-a3b9-06c015d8902d)
 ![afbeelding](https://github.com/user-attachments/assets/70053f21-8736-48ee-9fb6-fab88c11ded8)
