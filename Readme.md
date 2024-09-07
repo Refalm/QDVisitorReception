@@ -140,7 +140,7 @@ PHP 5 and PHP 7 could probably work fine too, haven't tested that.
 
 ### MariaDB
 
-MySQL or Oracle Datebase will probably work fine.
+MySQL or Oracle Database will probably work fine.
 
 You could probably easily convert the database to PostgreSQL, Microsoft SQL, IBM Db2, etc. since it's not that complicated of structure. There aren't even foreign keys or procedures.
 
