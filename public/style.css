@@ -45,12 +45,11 @@ button.spacing
 
 form
 {
-	background:#fafafa;
+	background:#d4d4d4;
 }
 
 input#submitname
 {
-	font-size:20px;
 	height:80px; width:80px;
 	font-size:x-large;
 }
