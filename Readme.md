@@ -7,10 +7,12 @@ This thing is written in HTML, CSS, and PHP with the mysqli extension.
 ![afbeelding](https://user-images.githubusercontent.com/10923347/201535004-2b0f41f9-5b35-4420-8af8-a43ab2e9d4f6.png)
 You'll be greeted by a choice between employee or visitor.
 
+![afbeelding](https://github.com/user-attachments/assets/a8b8006f-eb09-4f99-b121-0592d868c0ef)
 ![afbeelding](https://user-images.githubusercontent.com/10923347/201535043-6e91eb8b-a858-47fd-a5eb-6393b7c1d2be.png)
 At the employees page, employees can indicate whether they're present or not.
 They can tap the Yes/No button, and it'll change to Yes or No immediately.
 This assumes everyone at the organization is a grown up.
+Before entering the employees page, you must type in a PIN code.
 
 ![afbeelding](https://user-images.githubusercontent.com/10923347/201535202-d5db23c3-f890-49e7-8bb0-aaa0520f06b3.png)
 ![afbeelding](https://user-images.githubusercontent.com/10923347/201535192-485823e0-3431-4372-a2e0-0b9f7d7c7b75.png)
@@ -30,20 +32,26 @@ Receptionists can administer visitors and employees on the /reception page.
 
 Rename ```.env.dist``` to ```.env``` to create the configuration file.
 
-## MariaDB password
+### MariaDB password
 
 In ```.env```, change the MariaDB password called ```changeme```.
 
-## Logo
+### Logo
 
 In ```.env``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
 
 As a guideline, the height shouldn't be higher than 220 pixels, no wider than 100 pixels, and the background should be transparent.
 
-## Privacy e-mail address
+### Privacy e-mail address
 
 In ```.env``` you can set the e-mail address where users can come in contact with your organization's data protection officer for GDPR related questions and/or "purge me from your memories and databanks" requests.
 If your organization doesn't have a data protection officer yet, you're all going to EU jail, where you'll be tortured to death by woodworking activities, conjugal visits by hired service people, and cake baking.
+
+### PIN code for employees
+
+Before entering the Employee page, you'll be greated with a numpad to enter a PIN code.
+
+In ```.env```, you can change the PIN code.
 
 ## Reception page
 
