@@ -23,14 +23,14 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<title>Pincode</title>
+		<title>PIN code</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="./style.css">
 	</head>
 	<body>
 		<form method="post" action="">
 			<fieldset>
-				<legend>Pincode</legend>
+				<legend>PIN code</legend>
 				<div class="numpad">
 					<input type="password" name="pincode" id="pincode" class="hidden-input" required />
 					<?php for ($i = 1; $i <= 9; $i++): ?>
