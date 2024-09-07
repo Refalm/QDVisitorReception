@@ -87,6 +87,7 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 			$taalnlset = " selected=\"selected\"";
 			$taalenset = "";
 			$taalfyset = "";
+			$taalieset = "";
 		}
 
 		else if ($_COOKIE["taal"] == "en")
@@ -94,13 +95,23 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 			$taalenset = " selected=\"selected\"";
 			$taalnlset = "";
 			$taalfyset = "";
+			$taalieset = "";
 		}
-		
+
 		else if ($_COOKIE["taal"] == "fy")
 		{
 			$taalfyset = " selected=\"selected\"";
 			$taalenset = "";
 			$taalnlset = "";
+			$taalieset = "";
+		}
+
+		else if ($_COOKIE["taal"] == "ie")
+		{
+			$taalieset = " selected=\"selected\"";
+			$taalenset = "";
+			$taalnlset = "";
+			$taalfyset = "";
 		}
 	}
 		else
@@ -108,12 +119,14 @@ if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime 
 			$taalenset = " selected=\"selected\"";
 			$taalnlset = "";
 			$taalfyset = "";
+			$taalieset = "";
 		}
 	?>
 	<select onchange="location = this.value;" id="taal">
 		<option value="./?taal=en"<?php echo $taalenset; ?>>🇬🇧 English</option>
 		<option value="./?taal=fy"<?php echo $taalfyset; ?>>🏁 Frysk</option>
 		<option value="./?taal=nl"<?php echo $taalnlset; ?>>🇳🇱 Nederlands</option>
+		<option value="./?taal=ie"<?php echo $taalieset; ?>>🇮🇪 Gaeilge</option>
 	</select>
 	</div>
 
