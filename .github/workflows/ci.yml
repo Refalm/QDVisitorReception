@@ -12,8 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v7
       name: 📥 Checkout
-      with:
-        token: ${{ secrets.PAT_POKEN }}
 
     - name: 💿 Setup PHP
       uses: shivammathur/setup-php@v2
