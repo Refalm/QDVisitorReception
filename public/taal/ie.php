@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . "/../../configuration.php");
 $taal = array();
 
 $taal['Accept']					= 'Glac & Ar Aghaidh';
@@ -30,7 +31,7 @@ $taal['INPUT']					= 'Críochnaigh Clárú';
 $taal['NAME_EMPLOYEE4VISIT']	= 'Cé a bhfuil tú ag tabhairt cuairte air?';
 
 $taal['VISITORIN_TITLE']		= 'Clárú cuairteoirí';
-$taal['VISITORIN_HANDLING']		= 'Próiseálaimid na sonraí thíos ar mhaithe le sábháilteacht agus stórálfaimid iad ar feadh dhá lá ar a mhéad:<ul><li>Céadainm agus sloinne;</li><li>Eagraíocht;</li><li>Dáta agus am;</li><li>Faisnéis faoin duine nó roinn.</li></ul><strong>Tá sé de cheart agat iarraidh ar do shonraí a scriosadh trí ríomhphost a sheoladh chuig<br />' . ($privacymail ?? '') . '</strong>';
+$taal['VISITORIN_HANDLING']		= 'Próiseálaimid na sonraí thíos ar mhaithe le sábháilteacht agus stórálfaimid iad ar feadh dhá lá ar a mhéad:<ul><li>Céadainm agus sloinne;</li><li>Eagraíocht;</li><li>Dáta agus am;</li><li>Faisnéis faoin duine nó roinn.</li></ul><strong>Tá sé de cheart agat iarraidh ar do shonraí a scriosadh trí ríomhphost a sheoladh chuig<br />' . $privacymail . '</strong>';
 $taal['VISITORIN_RULESTITLE']	= 'Rialacha do chuairteoirí';
 $taal['VISITORIN_RULESCAM']		= 'Tá grianghrafadóireacht agus taifeadadh fuaime toirmiscthe gan cead.';
 $taal['VISITORIN_RULESESD']		= 'Lean treoracha na foirne i gcriosanna sábháilte.';

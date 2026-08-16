@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . "/../../configuration.php");
 $taal = array();
 
 $taal['Accept']					= 'Akkoord & Verder';
@@ -30,7 +31,7 @@ $taal['INPUT']					= 'Registratie Afronden';
 $taal['NAME_EMPLOYEE4VISIT']	= 'Wie bezoekt u?';
 
 $taal['VISITORIN_TITLE']		= 'Bezoekersregistratie';
-$taal['VISITORIN_HANDLING']		= 'Onderstaande gegevens verwerken wij voor de veiligheid en calamiteiten en bewaren wij maximaal twee dagen:<ul><li>Voornaam en achternaam;</li><li>Organisatie waarvoor u werkzaam bent;</li><li>Datum en tijdstip van aankomst en vertrek;</li><li>Gegevens die betrekking hebben op de persoon of afdeling die u wenst te bezoeken.</li></ul><strong>U hebt het recht om bezwaar te maken tegen de gegevensverwerking, of u kunt verzoeken uw gegevens te wissen door een e-mail te sturen naar<br />' . ($privacymail ?? '') . '</strong>';
+$taal['VISITORIN_HANDLING']		= 'Onderstaande gegevens verwerken wij voor de veiligheid en calamiteiten en bewaren wij maximaal twee dagen:<ul><li>Voornaam en achternaam;</li><li>Organisatie waarvoor u werkzaam bent;</li><li>Datum en tijdstip van aankomst en vertrek;</li><li>Gegevens die betrekking hebben op de persoon of afdeling die u wenst te bezoeken.</li></ul><strong>U hebt het recht om bezwaar te maken tegen de gegevensverwerking, of u kunt verzoeken uw gegevens te wissen door een e-mail te sturen naar<br />' . $privacymail . '</strong>';
 $taal['VISITORIN_RULESTITLE']	= 'Huisregels voor bezoekers';
 $taal['VISITORIN_RULESCAM']		= 'Fotograferen, filmen en/of het maken van opnamen is zonder toestemming verboden.';
 $taal['VISITORIN_RULESESD']		= 'Bij het betreden van een ESD-veilige zone volgt u instructies van personeel op.';

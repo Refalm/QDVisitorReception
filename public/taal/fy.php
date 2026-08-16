@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . "/../../configuration.php");
 $taal = array();
 
 $taal['Accept']					= 'Akseptearje & Fierder';
@@ -30,7 +31,7 @@ $taal['INPUT']					= 'Registraasje Ofslute';
 $taal['NAME_EMPLOYEE4VISIT']	= 'Wa besykje jo?';
 
 $taal['VISITORIN_TITLE']		= 'Besikersregistraasje';
-$taal['VISITORIN_HANDLING']		= 'Wy ferwurkje de ûndersteande gegevens foar de goede ôfhanneling fan rampen en wy bewarje maksimaal twa dagen:<ul><li>Foarnamme en achternamme;</li><li>Organisaasje wêrfoar jo wurkje;</li><li>Datum en tiid fan oankomst en fertrek;</li><li>Ynformaasje oangeande de persoan of ôfdieling dy\'t jo wolle besykje.</li></ul><strong>Jo hawwe it rjocht om beswier te meitsjen tsjin de gegevensferwurking fan boppesteande gegevens troch it stjoeren fan in e-post nei<br />' . ($privacymail ?? '') . '</strong>';
+$taal['VISITORIN_HANDLING']		= 'Wy ferwurkje de ûndersteande gegevens foar de goede ôfhanneling fan rampen en wy bewarje maksimaal twa dagen:<ul><li>Foarnamme en achternamme;</li><li>Organisaasje wêrfoar jo wurkje;</li><li>Datum en tiid fan oankomst en fertrek;</li><li>Ynformaasje oangeande de persoan of ôfdieling dy\'t jo wolle besykje.</li></ul><strong>Jo hawwe it rjocht om beswier te meitsjen tsjin de gegevensferwurking fan boppesteande gegevens troch it stjoeren fan in e-post nei<br />' . $privacymail . '</strong>';
 $taal['VISITORIN_RULESTITLE']	= 'Húshâlding regelt besikers';
 $taal['VISITORIN_RULESCAM']		= 'Foto\'s nimme, filmje en/of audio-opnames meitsje is ferbean sûnder tastimming.';
 $taal['VISITORIN_RULESESD']		= 'By it ynfieren fan in ESD-feilich gebiet moatte jo de ynstruksjes fan it personiel folgje.';

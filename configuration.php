@@ -23,7 +23,7 @@ $password         = $_ENV['MARIADB_PASSWORD'] ?? getenv('MARIADB_PASSWORD') ?: '
 $database         = $_ENV['MARIADB_DATABASE'] ?? getenv('MARIADB_DATABASE') ?: 'qdvrdb';
 $logo             = $_ENV['LOGO'] ?? getenv('LOGO') ?: 'northernpetrol';
 $privacymail      = $_ENV['PRIVACYMAIL'] ?? getenv('PRIVACYMAIL') ?: 'privacy@northernpetrol.example';
-$employee_pincode = (string)($_ENV['EMPLOYEE_PINCODE'] ?? getenv('EMPLOYEE_PINCODE') ?: '1234');
+$employee_pincode = $_ENV['EMPLOYEE_PINCODE'] ?? getenv('EMPLOYEE_PINCODE') ?: '1234';
 $retention_days   = (int)($_ENV['RETENTION_DAYS'] ?? getenv('RETENTION_DAYS') ?: 2);
 
 try {

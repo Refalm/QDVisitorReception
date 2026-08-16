@@ -3,7 +3,7 @@ require_once(__DIR__ . "/../configuration.php");
 require_once(__DIR__ . "/sub/taal.php");
 
 // <Delete expired visitor entries after retention days>
-$days = max(1, (int)($retention_days ?? 2));
+$days = max(1, $retention_days);
 $stmt = $dbconnection->prepare("DELETE FROM visitor WHERE departtime IS NOT NULL AND departtime <= NOW() - INTERVAL ? DAY");
 if ($stmt) {
     $stmt->bind_param("i", $days);
