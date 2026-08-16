@@ -28,3 +28,21 @@ if (file_exists($taalFile)) {
 } else {
     include __DIR__ . '/../taal/en.php';
 }
+
+function render_lang_switcher(): string
+{
+    global $selectedLang;
+    $languages = [
+        'nl' => 'NL',
+        'en' => 'EN',
+        'fy' => 'FY',
+        'ie' => 'IE'
+    ];
+    $html = '<div class="lang-selector linked-buttons" role="group" aria-label="Language">';
+    foreach ($languages as $code => $label) {
+        $activeClass = ($selectedLang === $code) ? ' active' : '';
+        $html .= '<a href="?taal=' . urlencode($code) . '" class="lang-btn' . $activeClass . '" title="' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</a>';
+    }
+    $html .= '</div>';
+    return $html;
+}

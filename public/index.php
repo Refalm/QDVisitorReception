@@ -29,39 +29,46 @@ $currentLang = $_SESSION['taal'] ?? $_COOKIE['taal'] ?? 'en';
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 <link rel="manifest" href="favicon/manifest.json">
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#273445">
+<script src="./kiosk.js" defer></script>
 </head>
 <body id="landing">
 
-<div class="kiosk-header">
-    <div class="kiosk-clock" id="kiosk-clock">
-        <span class="time" id="clock-time">--:--</span>
-        <span id="clock-date">--------</span>
+<header class="headerbar">
+    <div class="headerbar-left">
+        <div class="headerbar-clock">
+            <span>🕒</span>
+            <span class="time" id="clock-time">--:--</span>
+            <span id="clock-date" style="opacity:0.8;"></span>
+        </div>
     </div>
-
-    <div class="lang-selector">
-        <a href="./?taal=en" class="lang-btn <?php echo ($currentLang === 'en') ? 'active' : ''; ?>">🇬🇧 EN</a>
-        <a href="./?taal=nl" class="lang-btn <?php echo ($currentLang === 'nl') ? 'active' : ''; ?>">🇳🇱 NL</a>
-        <a href="./?taal=fy" class="lang-btn <?php echo ($currentLang === 'fy') ? 'active' : ''; ?>">🏁 FY</a>
-        <a href="./?taal=ie" class="lang-btn <?php echo ($currentLang === 'ie') ? 'active' : ''; ?>">🇮🇪 IE</a>
+    <div class="headerbar-center">
+        <span class="headerbar-title"><?php echo e($organization); ?></span>
     </div>
-</div>
+    <div class="headerbar-right">
+        <?php echo render_lang_switcher(); ?>
+    </div>
+</header>
 
-<div class="landing-container">
-    <a href="./employee.php" class="nodecoration">
-        <button class="big" type="button">
-            <span class="bigfont">👨🏼‍💻</span>
-            <span class="tekst"><?php echo e($taal['Employee'] ?? 'Employee'); ?></span>
-        </button>
-    </a>
+<main class="welcome-view">
+    <div class="welcome-badge-icon">🏢</div>
+    <h1 class="welcome-title"><?php echo e($organization); ?></h1>
+    <p class="welcome-subtitle"><?php echo e($taal['VISITORIN_TITLE'] ?? 'Welcome to Visitor Reception'); ?></p>
 
-    <a href="./visitor_land.php" class="nodecoration">
-        <button class="big" type="button">
-            <span class="bigfont">🚶🏼‍</span>
-            <span class="tekst"><?php echo e($taal['Visitor'] ?? 'Visitor'); ?></span>
-        </button>
-    </a>
-</div>
+    <div class="welcome-tiles-grid">
+        <a href="./visitor_land.php" class="welcome-tile suggested" title="<?php echo e($taal['Visitor'] ?? 'Visitor'); ?>">
+            <div class="welcome-tile-icon">🚶🏼‍</div>
+            <div class="welcome-tile-title"><?php echo e($taal['Visitor'] ?? 'Visitor'); ?></div>
+            <div class="welcome-tile-desc"><?php echo e($taal['Entering'] ?? 'Check In / Out'); ?></div>
+        </a>
+
+        <a href="./employee.php" class="welcome-tile" title="<?php echo e($taal['Employee'] ?? 'Employee'); ?>">
+            <div class="welcome-tile-icon">👨🏼‍💻</div>
+            <div class="welcome-tile-title"><?php echo e($taal['Employee'] ?? 'Employee'); ?></div>
+            <div class="welcome-tile-desc"><?php echo e($taal['Employees_present'] ?? 'Staff Access & Presence'); ?></div>
+        </a>
+    </div>
+</main>
 
 <?php include __DIR__ . '/sub/logo.php'; ?>
 

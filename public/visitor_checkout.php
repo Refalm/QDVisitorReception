@@ -58,10 +58,9 @@ if (isset($_GET['id']) || isset($_GET['visitorname'])) {
 <?php if ($status === 'success'): ?>
 <body id="success">
     <div class="result-box">
-        <span class="bigfont">😸</span>
-        <br /><br />
+        <span class="welcome-badge-icon">😸</span>
         <div class="tekst_header"><?php echo e($taal['VISITOROUT_CHECKEDOUT'] ?? 'You have been checked out'); ?>, <?php echo e($visitorname); ?>!</div>
-        <p style="font-size:20px;margin-top:12px;opacity:0.9;"><?php echo e($taal['VISITOROUT_THX'] ?? 'Thanks for stopping by.'); ?></p>
+        <p style="font-size:18px;margin-top:10px;opacity:0.9;"><?php echo e($taal['VISITOROUT_THX'] ?? 'Thanks for stopping by.'); ?></p>
         <div class="countdown-bar"><div class="countdown-progress"></div></div>
         <a href="./index.php" class="done-btn">✓ <?php echo e($taal['Done'] ?? 'Done'); ?></a>
     </div>
@@ -69,8 +68,7 @@ if (isset($_GET['id']) || isset($_GET['visitorname'])) {
 <?php else: ?>
 <body id="error">
     <div class="result-box">
-        <span class="bigfont">🙀</span>
-        <br /><br />
+        <span class="welcome-badge-icon">🙀</span>
         <div class="tekst_header"><?php echo e($taal['DBERROR'] ?? 'An error occurred during checkout.'); ?></div>
         <br><br>
         <a href="./visitor_out.php" class="done-btn">⬅️ <?php echo e($taal['Back'] ?? 'Back'); ?></a>

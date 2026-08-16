@@ -56,246 +56,235 @@ if ($res = $dbconnection->query("SELECT id, name, present FROM employee ORDER BY
 <title>Reception Administration - QDVisitorReception</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css" />
 <style>
-    * { box-sizing: border-box; }
     body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: #f4f6f8;
-        color: #222;
-        margin: 0;
-        padding: 24px;
+        padding: 0;
+        background: var(--bg-context);
     }
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
+    .reception-container {
+        max-width: 1160px;
+        margin: 28px auto 60px auto;
+        padding: 0 20px;
     }
-    h1 {
-        color: #1a202c;
-        border-bottom: 2px solid #e2e8f0;
-        padding-bottom: 8px;
-        margin-top: 32px;
-    }
-    .card {
-        background: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        padding: 20px;
-        margin-bottom: 30px;
+    .table-container {
         overflow-x: auto;
     }
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 10px;
+        margin-top: 8px;
     }
     th, td {
-        padding: 12px 14px;
+        padding: 14px 16px;
         text-align: left;
-        border-bottom: 1px solid #edf2f7;
+        border-bottom: 1px solid var(--border-color);
     }
     th {
-        background: #f7fafc;
+        background: var(--color-silver-100);
         font-weight: 600;
-        color: #4a5568;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
     }
     tr:hover {
         background: #f8fafc;
     }
-    .badge {
-        display: inline-block;
-        padding: 4px 8px;
-        border-radius: 4px;
+    .badge-present {
+        background: rgba(40, 188, 163, 0.15);
+        color: var(--color-mint-900);
+        border: 1px solid var(--color-mint-500);
+        padding: 4px 10px;
+        border-radius: var(--radius-pill);
         font-size: 13px;
         font-weight: 600;
-    }
-    .badge-present {
-        background: #c6f6d5;
-        color: #22543d;
+        display: inline-block;
     }
     .badge-departed {
-        background: #edf2f7;
-        color: #4a5568;
-    }
-    .btn-delete {
-        background: #fff5f5;
-        border: 1px solid #fed7d7;
-        color: #e53e3e;
-        border-radius: 4px;
-        padding: 6px 10px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-    .btn-delete:hover {
-        background: #feb2b2;
-    }
-    .form-group {
-        margin-bottom: 16px;
-    }
-    .input-text {
-        padding: 10px 14px;
-        font-size: 16px;
-        border: 1px solid #cbd5e0;
-        border-radius: 4px;
-        width: 100%;
-        max-width: 400px;
-    }
-    .btn-primary {
-        background: #3182ce;
-        color: #ffffff;
-        border: none;
-        padding: 10px 18px;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .btn-primary:hover {
-        background: #2b6cb0;
-    }
-    .alert {
-        padding: 12px 16px;
-        border-radius: 6px;
-        margin-bottom: 20px;
-        font-weight: 500;
-    }
-    .alert-success { background: #c6f6d5; color: #22543d; }
-    .alert-warning { background: #feebc8; color: #7b341e; }
-    .alert-error { background: #fed7d7; color: #742a2a; }
-    .back-nav {
-        margin-top: 30px;
-    }
-    .btn-back {
-        background: #4a5568;
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 4px;
-        text-decoration: none;
+        background: var(--color-silver-100);
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+        padding: 4px 10px;
+        border-radius: var(--radius-pill);
+        font-size: 13px;
         font-weight: 600;
         display: inline-block;
     }
-    .empty-state {
+    .btn-delete-row {
+        background: var(--danger-bg);
+        border: 1px solid var(--color-strawberry-100);
+        color: var(--danger);
+        border-radius: var(--radius-entry);
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        transition: all 0.15s ease;
+    }
+    .btn-delete-row:hover {
+        background: var(--danger);
+        color: #ffffff;
+    }
+    .alert-box {
+        padding: 14px 18px;
+        border-radius: var(--radius-entry);
+        margin-bottom: 24px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    .alert-box.alert-success {
+        background: rgba(40, 188, 163, 0.15);
+        color: var(--color-mint-900);
+        border: 1px solid var(--color-mint-500);
+    }
+    .alert-box.alert-warning {
+        background: rgba(249, 196, 64, 0.2);
+        color: var(--color-banana-900);
+        border: 1px solid #ffe16b;
+    }
+    .alert-box.alert-error {
+        background: var(--danger-bg);
+        color: var(--color-strawberry-900);
+        border: 1px solid var(--color-strawberry-100);
+    }
+    .empty-state-box {
         text-align: center;
-        padding: 40px 20px;
-        color: #a0aec0;
+        padding: 48px 20px;
+        color: var(--text-muted);
+        font-size: 17px;
     }
 </style>
 </head>
-<body>
-<div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-        <h2>QDVisitorReception - Reception Desk</h2>
-        <a href="../" class="btn-back">⬅️ Back to Kiosk</a>
-    </div>
+<body id="context">
 
+<header class="headerbar">
+    <div class="headerbar-left">
+        <span class="headerbar-title">QDVisitorReception — Reception Desk</span>
+    </div>
+    <div class="headerbar-right">
+        <a href="../" class="back-btn">
+            <span>⬅️</span>
+            <span>Back to Kiosk</span>
+        </a>
+    </div>
+</header>
+
+<div class="reception-container">
     <?php if ($notice): ?>
-        <div class="alert alert-<?php echo e($notice['type']); ?>">
+        <div class="alert-box alert-<?php echo e($notice['type']); ?>">
             <?php echo e($notice['message']); ?>
         </div>
     <?php endif; ?>
 
-    <h1>Visitors</h1>
+    <h1>Active & Past Visitors</h1>
     <div class="card">
         <?php if (!empty($visitors)): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>E-mail</th>
-                        <th>Organization</th>
-                        <th>Host</th>
-                        <th>Arrived</th>
-                        <th>Status / Departed</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($visitors as $v): ?>
+            <div class="table-container">
+                <table>
+                    <thead>
                         <tr>
-                            <td><strong><?php echo e($v->visitorname); ?></strong></td>
-                            <td><?php echo e($v->visitormail); ?></td>
-                            <td><?php echo e($v->visitororg); ?></td>
-                            <td><?php echo e($v->visitorhost); ?></td>
-                            <td><?php echo e($v->arrivetime); ?></td>
-                            <td>
-                                <?php if ($v->departtime === null || $v->departtime === '2038-01-19 03:14:07'): ?>
-                                    <span class="badge badge-present">🟢 Active (Present)</span>
-                                <?php else: ?>
-                                    <span class="badge badge-departed"><?php echo e($v->departtime); ?></span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <form method="post" action="delete.php" onsubmit="return confirm('Delete visitor <?php echo e(addslashes($v->visitorname)); ?>?');" style="display:inline;">
-                                    <input type="hidden" name="csrf_token" value="<?php echo e(get_csrf_token()); ?>" />
-                                    <input type="hidden" name="visitor_id" value="<?php echo (int)$v->id; ?>" />
-                                    <button type="submit" class="btn-delete">❌ Delete</button>
-                                </form>
-                            </td>
+                            <th>Name</th>
+                            <th>E-mail</th>
+                            <th>Organization</th>
+                            <th>Host</th>
+                            <th>Arrived</th>
+                            <th>Status / Departed</th>
+                            <th>Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($visitors as $v): ?>
+                            <tr>
+                                <td><strong><?php echo e($v->visitorname); ?></strong></td>
+                                <td><?php echo e($v->visitormail); ?></td>
+                                <td><?php echo e($v->visitororg); ?></td>
+                                <td><?php echo e($v->visitorhost); ?></td>
+                                <td><?php echo e($v->arrivetime); ?></td>
+                                <td>
+                                    <?php if ($v->departtime === null || $v->departtime === '2038-01-19 03:14:07'): ?>
+                                        <span class="badge-present">🟢 Active (Present)</span>
+                                    <?php else: ?>
+                                        <span class="badge-departed"><?php echo e($v->departtime); ?></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <form method="post" action="delete.php" onsubmit="return confirm('Delete visitor record <?php echo e(addslashes($v->visitorname)); ?>?');" style="display:inline;">
+                                        <input type="hidden" name="csrf_token" value="<?php echo e(get_csrf_token()); ?>" />
+                                        <input type="hidden" name="visitor_id" value="<?php echo (int)$v->id; ?>" />
+                                        <button type="submit" class="btn-delete-row">❌ Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php else: ?>
-            <div class="empty-state">
+            <div class="empty-state-box">
                 <span style="font-size:48px;">🗇</span><br><br>No visitor records found.
             </div>
         <?php endif; ?>
     </div>
 
-    <h1>Employees</h1>
+    <h1>Employees & Staff List</h1>
     <div class="card">
         <?php if (!empty($employees)): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Presence Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($employees as $emp): ?>
+            <div class="table-container">
+                <table>
+                    <thead>
                         <tr>
-                            <td><strong><?php echo e($emp->name); ?></strong></td>
-                            <td>
-                                <?php if ($emp->present): ?>
-                                    <span class="badge badge-present">🔳 Present</span>
-                                <?php else: ?>
-                                    <span class="badge badge-departed">🔲 Away</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <form method="post" action="delete.php" onsubmit="return confirm('Remove employee <?php echo e(addslashes($emp->name)); ?>?');" style="display:inline;">
-                                    <input type="hidden" name="csrf_token" value="<?php echo e(get_csrf_token()); ?>" />
-                                    <input type="hidden" name="employee_id" value="<?php echo (int)$emp->id; ?>" />
-                                    <button type="submit" class="btn-delete">❌ Remove</button>
-                                </form>
-                            </td>
+                            <th>Name</th>
+                            <th>Presence Status</th>
+                            <th>Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($employees as $emp): ?>
+                            <tr>
+                                <td><strong><?php echo e($emp->name); ?></strong></td>
+                                <td>
+                                    <?php if ($emp->present): ?>
+                                        <span class="badge-present">🔳 Present</span>
+                                    <?php else: ?>
+                                        <span class="badge-departed">🔲 Away</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <form method="post" action="delete.php" onsubmit="return confirm('Remove employee <?php echo e(addslashes($emp->name)); ?>?');" style="display:inline;">
+                                        <input type="hidden" name="csrf_token" value="<?php echo e(get_csrf_token()); ?>" />
+                                        <input type="hidden" name="employee_id" value="<?php echo (int)$emp->id; ?>" />
+                                        <button type="submit" class="btn-delete-row">❌ Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php else: ?>
-            <div class="empty-state">
+            <div class="empty-state-box">
                 <span style="font-size:48px;">🗇</span><br><br>The employee list is empty.
             </div>
         <?php endif; ?>
     </div>
 
     <div class="card">
-        <h3>Add New Employee</h3>
+        <h2>Add New Employee</h2>
         <form method="post" action="./index.php">
             <input type="hidden" name="csrf_token" value="<?php echo e(get_csrf_token()); ?>" />
             <input type="hidden" name="add_employee" value="1" />
             <div class="form-group">
-                <label for="employeename" style="display:block;margin-bottom:8px;font-weight:600;">Employee Name</label>
-                <input id="employeename" name="employeename" type="text" placeholder="e.g. Henk de Vries" required class="input-text" />
+                <label for="employeename">Employee Full Name</label>
+                <input id="employeename" name="employeename" type="text" placeholder="e.g. Henk de Vries" required class="entry" style="max-width:400px;" />
             </div>
-            <button type="submit" class="btn-primary">🖋 Add Employee</button>
+            <button type="submit" class="button suggested-action" style="width:auto;height:48px;font-size:16px;">
+                <span>🖋 Add Employee</span>
+            </button>
         </form>
-    </div>
-
-    <div class="back-nav">
-        <a href="../" class="btn-back">⬅️ Back to Kiosk</a>
     </div>
 </div>
 </body>

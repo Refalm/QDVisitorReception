@@ -13,7 +13,7 @@ if ($res = $dbconnection->query("SELECT id, visitorname, visitororg, visitorhost
 ?><!DOCTYPE html>
 <html lang="<?php echo e($_SESSION['taal'] ?? 'en'); ?>">
 <head>
-<title>QDVisitorReception</title>
+<title>QDVisitorReception - <?php echo e($taal['Leaving'] ?? 'Check Out'); ?></title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="preconnect" href="https://fonts.bunny.net">
@@ -22,13 +22,27 @@ if ($res = $dbconnection->query("SELECT id, visitorname, visitororg, visitorhost
 <script src="./kiosk.js" defer></script>
 </head>
 <body id="context">
-<?php include __DIR__ . '/sub/logo.php'; ?>
 
-<div class="content-wrapper">
+<header class="headerbar">
+    <div class="headerbar-left">
+        <a href="./visitor_land.php" class="back-btn">
+            <span>⬅️</span>
+            <span><?php echo e($taal['Back'] ?? 'Back'); ?></span>
+        </a>
+    </div>
+    <div class="headerbar-center">
+        <span class="headerbar-title"><?php echo e($taal['Leaving'] ?? 'Check Out'); ?></span>
+    </div>
+    <div class="headerbar-right">
+        <?php echo render_lang_switcher(); ?>
+    </div>
+</header>
+
+<main class="content-wrapper">
     <div class="card">
-        <h1><?php echo e($taal['Leaving'] ?? 'Check out'); ?></h1>
-        <p style="color:var(--text-muted);font-size:18px;margin-bottom:24px;">
-            <?php echo e($taal['INFO_VISITOROUT_SEARCH'] ?? 'Type your name to find your visit:'); ?>
+        <h1><?php echo e($taal['Leaving'] ?? 'Check Out'); ?></h1>
+        <p style="color:var(--text-muted);font-size:16px;margin-bottom:20px;">
+            <?php echo e($taal['INFO_VISITOROUT_SEARCH'] ?? 'Type your name to quickly find your registration:'); ?>
         </p>
 
         <div class="search-wrapper">
@@ -48,24 +62,25 @@ if ($res = $dbconnection->query("SELECT id, visitorname, visitororg, visitorhost
                                 <span>🕒 <?php echo e($v->arrivetime); ?></span>
                             </div>
                         </div>
-                        <a href="visitor_checkout.php?id=<?php echo (int)$v->id; ?>" class="btn-checkout">
-                            <span>🚪🚶🏼 <?php echo e($taal['Check_out'] ?? 'Check out'); ?></span>
+                        <a href="visitor_checkout.php?id=<?php echo (int)$v->id; ?>" class="destructive-action btn-checkout">
+                            <span>🚪🚶🏼</span>
+                            <span><?php echo e($taal['Check_out'] ?? 'Check Out'); ?></span>
                         </a>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <div style="text-align:center;padding:40px;color:var(--text-muted);font-size:20px;">
+                <div style="text-align:center;padding:48px 20px;color:var(--text-muted);font-size:18px;">
                     <span style="font-size:48px;">🗇</span><br><br>
                     <?php echo e($taal['No_visitors_checked_in'] ?? 'No visitors currently checked in.'); ?>
                 </div>
             <?php endif; ?>
         </div>
-        <div id="no-match" style="display:none;text-align:center;padding:30px;color:var(--text-muted);font-size:20px;">
+        <div id="no-match" style="display:none;text-align:center;padding:36px;color:var(--text-muted);font-size:18px;">
             <span style="font-size:48px;">🤔</span><br><br>
             <?php echo e($taal['No_matches_found'] ?? 'No matches found...'); ?>
         </div>
     </div>
-</div>
+</main>
 
 <script>
 function filterVisitors() {
@@ -90,7 +105,7 @@ function filterVisitors() {
 }
 </script>
 
-<?php echo backurl("./visitor_land.php"); ?>
+<?php include __DIR__ . '/sub/logo.php'; ?>
 
 </body>
 </html>

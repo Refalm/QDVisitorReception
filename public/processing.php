@@ -62,8 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if ($status === 'success'): ?>
 <body id="success">
     <div class="result-box">
-        <span class="bigfont">😺</span>
-        <br /><br />
+        <span class="welcome-badge-icon">😺</span>
         <div class="tekst_header"><?php echo e($taal['VISITORPROC_YEE'] ?? 'Welcome!'); ?>, <?php echo e($visitorname); ?>!</div>
         <div class="countdown-bar"><div class="countdown-progress"></div></div>
         <a href="./index.php" class="done-btn">✓ <?php echo e($taal['Done'] ?? 'Done'); ?></a>
@@ -72,8 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php elseif ($status === 'already_inside'): ?>
 <body id="landing">
     <div class="result-box">
-        <span class="bigfont">😼</span>
-        <br /><br />
+        <span class="welcome-badge-icon">😼</span>
         <div class="tekst_header"><?php echo $taal['VISITORPROC_WUT'] ?? 'You are probably already registered.'; ?></div>
         <div class="countdown-bar"><div class="countdown-progress"></div></div>
         <a href="./index.php" class="done-btn">✓ <?php echo e($taal['Done'] ?? 'Done'); ?></a>
@@ -82,11 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php else: ?>
 <body id="error">
     <div class="result-box">
-        <span class="bigfont">🙀</span>
-        <br /><br />
+        <span class="welcome-badge-icon">🙀</span>
         <div class="tekst_header"><?php echo e($taal['DBERROR'] ?? 'An error occurred.'); ?></div>
         <?php if (!empty($statusMessage)): ?>
-            <br /><span class="tekst_code"><?php echo e($statusMessage); ?></span>
+            <br /><span class="tekst_code" style="background:rgba(0,0,0,0.25);padding:6px 12px;border-radius:6px;"><?php echo e($statusMessage); ?></span>
         <?php endif; ?>
         <br><br>
         <a href="./visitor_inn.php" class="done-btn">⬅️ <?php echo e($taal['Back'] ?? 'Back'); ?></a>
