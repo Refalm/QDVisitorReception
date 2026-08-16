@@ -1,73 +1,96 @@
 <?php
-require_once("../configuration.php");
-require_once("sub/back.php");
-require_once("sub/taal.php");
+require_once(__DIR__ . "/../configuration.php");
+require_once(__DIR__ . "/sub/back.php");
+require_once(__DIR__ . "/sub/taal.php");
+
+$activeVisitors = [];
+if ($res = $dbconnection->query("SELECT id, visitorname, visitororg, visitorhost, arrivetime FROM visitor WHERE departtime IS NULL ORDER BY arrivetime DESC")) {
+    while ($row = $res->fetch_object()) {
+        $activeVisitors[] = $row;
+    }
+    $res->close();
+}
 ?><!DOCTYPE html>
-<html>
+<html lang="<?php echo e($_SESSION['taal'] ?? 'en'); ?>">
 <head>
 <title>QDVisitorReception</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 <link rel="stylesheet" href="./style.css" />
-<?php
-if((isset($_POST['visitorname'])))
-{
-	echo "</head><body id=\"context\">";
-	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
+<script src="./kiosk.js" defer></script>
+</head>
+<body id="context">
+<?php include __DIR__ . '/sub/logo.php'; ?>
 
-	if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime = '2038-01-19 03:14:07' ORDER BY arrivetime DESC"))
-	{
-		if ($whovisitors->num_rows > 0)
-		{
-			echo "<form><fieldset><legend>".$taal['Search_results']."</legend><table class=\"liteborder regular readablefont\">";
-			echo "<tr><th class=\"liteborder\">".$taal['Name']."</th><th class=\"liteborder\">".$taal['E-mail_address']."</th><th class=\"liteborder\">".$taal['Organization']."</th><th class=\"liteborder\">".$taal['Host']."</th><th class=\"liteborder\">".$taal['Arrival']."</th><th class=\"liteborder\"></th></tr>";
+<div class="content-wrapper">
+    <div class="card">
+        <h1><?php echo e($taal['Leaving'] ?? 'Check out'); ?></h1>
+        <p style="color:var(--text-muted);font-size:18px;margin-bottom:24px;">
+            <?php echo e($taal['INFO_VISITOROUT_SEARCH'] ?? 'Type your name to find your visit:'); ?>
+        </p>
 
-			while ($row = $whovisitors->fetch_object())
-			{
-				echo "<tr>";
-				echo "<td class=\"liteborder\">" . $row->visitorname . "</td>";
-				echo "<td class=\"liteborder\">" . $row->visitormail . "</td>";
-				echo "<td class=\"liteborder\">" . $row->visitororg . "</td>";
-				echo "<td class=\"liteborder\">" . $row->visitorhost . "</td>";
-				echo "<td class=\"liteborder\">" . $row->arrivetime . "</td>";
-				echo "<td class=\"liteborder\"><abbr title=\"".$taal['Check_out']."\" class=\"nodecoration\"><a href=\"visitor_checkout.php?visitorname=" . $row->visitorname . "\" class=\"nodecoration\">🚪🚶🏼</a></abbr></td>";
-				echo "</tr></legend></fieldset></form>";
-			}
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="visitor-search" class="search-input" placeholder="<?php echo e($taal['Search_for_your_name'] ?? 'Search your name...'); ?>" autofocus autocapitalize="words" autocomplete="off" oninput="filterVisitors()" />
+        </div>
 
-			echo "</table><div id=\"info\"><div id=\"info_emoji\">ℹ</div><div id=\"info_content\">".$taal['INFO_VISITOROUT_PRESS']."</div></div>";
-			echo backurl("./visitor_out.php");
-		}
+        <div id="visitor-list" class="visitor-results-grid">
+            <?php if (!empty($activeVisitors)): ?>
+                <?php foreach ($activeVisitors as $v): ?>
+                    <div class="visitor-card" data-name="<?php echo e(strtolower($v->visitorname)); ?>">
+                        <div>
+                            <div class="visitor-card-name"><?php echo e($v->visitorname); ?></div>
+                            <div class="visitor-card-meta">
+                                <span>🏢 <?php echo e($v->visitororg); ?></span>
+                                <span>👤 <?php echo e($v->visitorhost); ?></span>
+                                <span>🕒 <?php echo e($v->arrivetime); ?></span>
+                            </div>
+                        </div>
+                        <a href="visitor_checkout.php?id=<?php echo (int)$v->id; ?>" class="btn-checkout">
+                            <span>🚪🚶🏼 <?php echo e($taal['Check_out'] ?? 'Check out'); ?></span>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div style="text-align:center;padding:40px;color:var(--text-muted);font-size:20px;">
+                    <span style="font-size:48px;">🗇</span><br><br>
+                    <?php echo e($taal['No_visitors_checked_in'] ?? 'No visitors currently checked in.'); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div id="no-match" style="display:none;text-align:center;padding:30px;color:var(--text-muted);font-size:20px;">
+            <span style="font-size:48px;">🤔</span><br><br>
+            <?php echo e($taal['No_matches_found'] ?? 'No matches found...'); ?>
+        </div>
+    </div>
+</div>
 
-		else if (($outtahere = $dbconnection->query("SELECT * FROM visitor WHERE visitorname = '$visitorname' AND departtime != '2038-01-19 03:14:07'")) && $outtahere->num_rows > 0)
-		{
-			echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\">";
-			echo "<span class=\"bigfont\">😼</span><br /><br />".$taal['VISITOROUT_ALREADY'].", $visitorname! ".$taal['VISITOROUT_THX']."";
-			echo backurl(".");
-		}
+<script>
+function filterVisitors() {
+    const query = document.getElementById('visitor-search').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.visitor-card');
+    let visibleCount = 0;
 
-		else
-		{
-			echo "</head><body id=\"error\">";
-			echo "<span class=\"bigfont\">🤔</span><br /><br />Hmmm... \"$visitorname\" ".$taal['VISITOROUT_NOTFOUND']."...";
-			echo backurl("./visitor_out.php");
-		}
-	}
+    cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        if (name.includes(query)) {
+            card.style.display = 'flex';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
 
-
-
-	else
-	{
-		echo "</head><body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">".$taal['DBERROR']."</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
-	}
-
+    const noMatch = document.getElementById('no-match');
+    if (noMatch) {
+        noMatch.style.display = (visibleCount === 0 && cards.length > 0) ? 'block' : 'none';
+    }
 }
+</script>
 
-else
-{
-	echo "</head><body id=\"context\">
-	<form id=\"searchname\" method=\"post\" action=\"" .$_SERVER['PHP_SELF']. "\"><fieldset><legend>".$taal['Name_search']."</legend><input id=\"visitorname\" name=\"visitorname\" type=\"text\" placeholder=\"".$taal['Search_for_your_name']."\" /><input id=\"submitname\" type=\"submit\" value=\"🔎\" /></fieldset></form><div id=\"info\"><div id=\"info_emoji\">ℹ</div><div id=\"info_content\">".$taal['INFO_VISITOROUT_SEARCH']."</div></div>";
-	echo backurl(".");
-}
+<?php echo backurl("./visitor_land.php"); ?>
 
-$dbconnection->close();
-?>
 </body>
 </html>

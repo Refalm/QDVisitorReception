@@ -1,44 +1,27 @@
 <?php
-include('../../configuration.php');
+require_once(__DIR__ . '/../../configuration.php');
 
-if (isset($_GET['visitorname']))
-{
-	$visitorname = mysqli_real_escape_string($dbconnection, $_GET['visitorname']);
-
-	if ($querysearch = $dbconnection->prepare("DELETE FROM visitor WHERE visitorname = '$visitorname'"))
-	{
-		$querysearch->execute();
-		$querysearch->close();
-	}
-	else
-	{
-		echo "🙀 Connection to the database failed or something, get the sysadmin. Show them this:<br /><br />" . $dbconnection->error;
-		$dbconnection->close();
-	}
-
-	header("Location: index.php");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (verify_csrf_token($_POST['csrf_token'] ?? null)) {
+        if (!empty($_POST['visitor_id'])) {
+            $visitorId = (int)$_POST['visitor_id'];
+            $stmt = $dbconnection->prepare("DELETE FROM visitor WHERE id = ?");
+            if ($stmt) {
+                $stmt->bind_param("i", $visitorId);
+                $stmt->execute();
+                $stmt->close();
+            }
+        } elseif (!empty($_POST['employee_id'])) {
+            $employeeId = (int)$_POST['employee_id'];
+            $stmt = $dbconnection->prepare("DELETE FROM employee WHERE id = ?");
+            if ($stmt) {
+                $stmt->bind_param("i", $employeeId);
+                $stmt->execute();
+                $stmt->close();
+            }
+        }
+    }
 }
 
-if (isset($_GET['name']))
-{
-	$name = mysqli_real_escape_string($dbconnection, $_GET['name']);
-
-	if ($querysearch = $dbconnection->prepare("DELETE FROM employee WHERE name = '$name'"))
-	{
-		$querysearch->execute();
-		$querysearch->close();
-	}
-	else
-	{
-		echo "🙀 Connection to the database failed or something, get the sysadmin. Show them this:<br /><br />" . $dbconnection->error;
-		$dbconnection->close();
-	}
-
-	header("Location: index.php");
-}
-
-else
-{
-	header("Location: index.php");
-}
-?>
+header("Location: index.php");
+exit;

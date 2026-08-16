@@ -1,1 +1,1 @@
-<img src="<?php echo "$logo"; ?>.png" alt="<?php echo "$logo"; ?>" id="logo" />
+<img src="<?php echo e($logo ?? 'northernpetrol'); ?>.png" alt="<?php echo e($logo ?? 'logo'); ?>" id="logo" />

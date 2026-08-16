@@ -1,0 +1,9 @@
+.git
+.github
+.env
+.env.*
+!.env.dist
+data
+vendor
+.idea
+.vscode

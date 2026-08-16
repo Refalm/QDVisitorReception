@@ -1,136 +1,81 @@
 <?php
-require_once("../configuration.php");
-include("sub/taal.php");
+require_once(__DIR__ . "/../configuration.php");
+require_once(__DIR__ . "/sub/taal.php");
 
-// <Delete expired visitor entries after two days>
-$mysqltime = date("Y-m-d H:i:s");
-$minustwodays = strtotime($mysqltime."- 2 days");
-$mysqltimeminustwodays = date("Y-m-d H:i:s",$minustwodays);
-
-if ($whovisitors = $dbconnection->query("SELECT * FROM visitor WHERE departtime <= '$mysqltimeminustwodays' AND departtime != '2038-01-19'"))
-{
-	if ($whovisitors->num_rows > 0)
-	{
-		while ($row = $whovisitors->fetch_object())
-		{
-			if ($twophonecallsandyouraccountcanbedeled = $dbconnection->prepare("DELETE FROM visitor WHERE visitorname = '" . $row->visitorname . "'"))
-			{
-				$twophonecallsandyouraccountcanbedeled->execute();
-				$twophonecallsandyouraccountcanbedeled->close();
-			}
-			else
-			{
-				echo "🙀<br>" . $dbconnection->error;
-				$dbconnection->close();
-			}
-		}
-	}
+// <Delete expired visitor entries after retention days>
+$days = max(1, (int)($retention_days ?? 2));
+$stmt = $dbconnection->prepare("DELETE FROM visitor WHERE departtime IS NOT NULL AND departtime <= NOW() - INTERVAL ? DAY");
+if ($stmt) {
+    $stmt->bind_param("i", $days);
+    $stmt->execute();
+    $stmt->close();
 }
-// </Delete expired visitor entries after two days>
+// </Delete expired visitor entries>
 
+$currentLang = $_SESSION['taal'] ?? $_COOKIE['taal'] ?? 'en';
 ?><!DOCTYPE html>
-<html>
+<html lang="<?php echo e($currentLang); ?>">
 <head>
 <title>QDVisitorReception</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="QDVisitorRegistration">
 <meta name="application-name" content="QDVisitorRegistration">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 <link rel="stylesheet" href="./style.css">
-<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 <link rel="manifest" href="favicon/manifest.json">
-<meta name="msapplication-TileColor" content="#e1e1e1">
-<meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#e1e1e1">
+<meta name="theme-color" content="#0f172a">
 </head>
 <body id="landing">
-<?php include 'sub/logo.php'; ?>
 
-<a href="./employee.php" class="nodecoration">
-	<button class="big">
-		<span class="bigfont">👨🏼‍💻</span><br><br><span class="tekst"><?php echo $taal['Employee']; ?></span>
-	</button>
-</a>
+<div class="kiosk-header">
+    <div class="kiosk-clock" id="kiosk-clock">
+        <span class="time" id="clock-time">--:--</span>
+        <span id="clock-date">--------</span>
+    </div>
 
-<a href="./visitor_land.php" class="nodecoration">
-	<button class="big spacing">
-		<span class="bigfont">🚶🏼‍</span><br><br><span class="tekst"><?php echo $taal['Visitor']; ?></span>
-	</button>
-</a>
-
-<div class="clear_both"></div>
-
-<div id="taaltaco">
-
-	<div id="taalhint">
-	CHANGE LANGUAGE
-	</div>
-
-	<div id="taal">
-	<?php
-	if(isSet($_COOKIE['taal']))
-	{
-		if ($_COOKIE["taal"] == "nl")
-		{
-			$taalnlset = " selected=\"selected\"";
-			$taalenset = "";
-			$taalfyset = "";
-			$taalieset = "";
-		}
-
-		else if ($_COOKIE["taal"] == "en")
-		{
-			$taalenset = " selected=\"selected\"";
-			$taalnlset = "";
-			$taalfyset = "";
-			$taalieset = "";
-		}
-
-		else if ($_COOKIE["taal"] == "fy")
-		{
-			$taalfyset = " selected=\"selected\"";
-			$taalenset = "";
-			$taalnlset = "";
-			$taalieset = "";
-		}
-
-		else if ($_COOKIE["taal"] == "ie")
-		{
-			$taalieset = " selected=\"selected\"";
-			$taalenset = "";
-			$taalnlset = "";
-			$taalfyset = "";
-		}
-	}
-		else
-		{
-			$taalenset = " selected=\"selected\"";
-			$taalnlset = "";
-			$taalfyset = "";
-			$taalieset = "";
-		}
-	?>
-	<select onchange="location = this.value;" id="taal">
-		<option value="./?taal=en"<?php echo $taalenset; ?>>🇬🇧 English</option>
-		<option value="./?taal=fy"<?php echo $taalfyset; ?>>🏁 Frysk</option>
-		<option value="./?taal=nl"<?php echo $taalnlset; ?>>🇳🇱 Nederlands</option>
-		<option value="./?taal=ie"<?php echo $taalieset; ?>>🇮🇪 Gaeilge</option>
-	</select>
-	</div>
-
+    <div class="lang-selector">
+        <a href="./?taal=en" class="lang-btn <?php echo ($currentLang === 'en') ? 'active' : ''; ?>">🇬🇧 EN</a>
+        <a href="./?taal=nl" class="lang-btn <?php echo ($currentLang === 'nl') ? 'active' : ''; ?>">🇳🇱 NL</a>
+        <a href="./?taal=fy" class="lang-btn <?php echo ($currentLang === 'fy') ? 'active' : ''; ?>">🏁 FY</a>
+        <a href="./?taal=ie" class="lang-btn <?php echo ($currentLang === 'ie') ? 'active' : ''; ?>">🇮🇪 IE</a>
+    </div>
 </div>
+
+<div class="landing-container">
+    <a href="./employee.php" class="nodecoration">
+        <button class="big" type="button">
+            <span class="bigfont">👨🏼‍💻</span>
+            <span class="tekst"><?php echo e($taal['Employee'] ?? 'Employee'); ?></span>
+        </button>
+    </a>
+
+    <a href="./visitor_land.php" class="nodecoration">
+        <button class="big" type="button">
+            <span class="bigfont">🚶🏼‍</span>
+            <span class="tekst"><?php echo e($taal['Visitor'] ?? 'Visitor'); ?></span>
+        </button>
+    </a>
+</div>
+
+<?php include __DIR__ . '/sub/logo.php'; ?>
+
+<script>
+function updateClock() {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateStr = now.toLocaleDateString('<?php echo ($currentLang === "nl" ? "nl-NL" : ($currentLang === "fy" ? "fy-NL" : "en-US")); ?>', { weekday: 'short', month: 'short', day: 'numeric' });
+    document.getElementById('clock-time').textContent = timeStr;
+    document.getElementById('clock-date').textContent = '• ' + dateStr;
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
 
 </body>
 </html>

@@ -3,16 +3,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - TZ=${TZ:-Europe/Amsterdam}
     ports:
-      - 80:80
-    links:
+      - "8080:80"
+    depends_on:
       - mariadb
+
   mariadb:
     image: mariadb:10
     env_file:
       - .env
+    environment:
+      - TZ=${TZ:-Europe/Amsterdam}
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
-      - ./data/db:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/db:/var/lib/mysql:Z
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro,Z

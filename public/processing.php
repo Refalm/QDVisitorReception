@@ -1,46 +1,96 @@
 <?php
-require_once("../configuration.php");
-require_once("sub/back.php");
-require_once("sub/taal.php");
+require_once(__DIR__ . "/../configuration.php");
+require_once(__DIR__ . "/sub/back.php");
+require_once(__DIR__ . "/sub/taal.php");
 
 $mysqltime = date("Y-m-d H:i:s");
+$status = 'error';
+$statusMessage = '';
+$visitorname = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? null)) {
+        $status = 'error';
+        $statusMessage = 'Invalid security token. Please try again.';
+    } elseif (!empty($_POST['visitorname']) && !empty($_POST['visitormail']) && !empty($_POST['visitororg'])) {
+        $visitorname = trim((string)$_POST['visitorname']);
+        $visitormail = trim((string)$_POST['visitormail']);
+        $visitororg  = trim((string)$_POST['visitororg']);
+        $visitorhost = trim((string)($_POST['visitorhost'] ?? ''));
+
+        // Check if this visitor is currently already registered and not departed
+        $checkStmt = $dbconnection->prepare("SELECT id FROM visitor WHERE visitorname = ? AND departtime IS NULL LIMIT 1");
+        if ($checkStmt) {
+            $checkStmt->bind_param("s", $visitorname);
+            $checkStmt->execute();
+            $checkRes = $checkStmt->get_result();
+            $alreadyInside = ($checkRes && $checkRes->num_rows > 0);
+            $checkStmt->close();
+
+            if ($alreadyInside) {
+                $status = 'already_inside';
+            } else {
+                $insertStmt = $dbconnection->prepare("INSERT INTO visitor (visitorname, visitormail, visitororg, visitorhost, arrivetime, departtime) VALUES (?, ?, ?, ?, ?, NULL)");
+                if ($insertStmt) {
+                    $insertStmt->bind_param("sssss", $visitorname, $visitormail, $visitororg, $visitorhost, $mysqltime);
+                    if ($insertStmt->execute()) {
+                        $status = 'success';
+                    } else {
+                        $status = 'error';
+                        $statusMessage = $dbconnection->error;
+                    }
+                    $insertStmt->close();
+                } else {
+                    $status = 'error';
+                    $statusMessage = $dbconnection->error;
+                }
+            }
+        }
+    }
+}
 ?><!DOCTYPE html>
-<html>
+<html lang="<?php echo e($_SESSION['taal'] ?? 'en'); ?>">
 <head>
 <title>QDVisitorReception</title>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 <link rel="stylesheet" href="./style.css" />
-<?php
-if((isset($_POST['visitorname'])) && (isset($_POST['visitormail'])) && (isset($_POST['visitororg'])))
-{
-	$visitorname = mysqli_real_escape_string($dbconnection, $_POST['visitorname']);
-	$visitormail = mysqli_real_escape_string($dbconnection, $_POST['visitormail']);
-	$visitororg = mysqli_real_escape_string($dbconnection, $_POST['visitororg']);
-	$visitorhost = mysqli_real_escape_string($dbconnection, $_POST['visitorhost']);
-	
-	$checkvisitorname = $_POST['visitorname'];
-	$check = mysqli_query($dbconnection,"SELECT * FROM visitor WHERE visitorname = '".$checkvisitorname."'");
-	
-	if (($insert = $dbconnection->prepare("INSERT INTO visitor (visitorname, visitormail, visitororg, visitorhost, arrivetime, departtime) VALUES ('".$visitorname."','".$visitormail."','".$visitororg."','".$visitorhost."','".$mysqltime."','2038-01-19 03:14:07')")) && (mysqli_num_rows($check)==0))
-	{
-		$insert->execute();
-		$insert->close();
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"success\"><span class=\"bigfont\">😺</span>\n<br /><br /><span class=\"tekst_header\">".$taal['VISITORPROC_YEE'].", $visitorname!</span>";
-	}
-	else
-	{
-		echo "<meta http-equiv=\"refresh\" content=\"60; URL=.\" /></head><body id=\"context\"><span class=\"bigfont\">😼</span>\n<br /><br /><span class=\"tekst_header\">".$taal['VISITORPROC_WUT']."</span>";
-	}
-	
-	$dbconnection->close();
-}
-else
-{
-	echo "</head><body id=\"error\"><span class=\"bigfont\">🙀</span>\n<br /><br /><span class=\"tekst_header\">".$taal['DBERROR']."</span><br /><br /><span class=\"tekst_code\">" . $dbconnection->error . "</span>";
-	$dbconnection->close();
-}
-
-echo backurl(".");
-?>
+<meta http-equiv="refresh" content="5; URL=./index.php" />
+</head>
+<?php if ($status === 'success'): ?>
+<body id="success">
+    <div class="result-box">
+        <span class="bigfont">😺</span>
+        <br /><br />
+        <div class="tekst_header"><?php echo e($taal['VISITORPROC_YEE'] ?? 'Welcome!'); ?>, <?php echo e($visitorname); ?>!</div>
+        <div class="countdown-bar"><div class="countdown-progress"></div></div>
+        <a href="./index.php" class="done-btn">✓ <?php echo e($taal['Done'] ?? 'Done'); ?></a>
+    </div>
 </body>
+<?php elseif ($status === 'already_inside'): ?>
+<body id="landing">
+    <div class="result-box">
+        <span class="bigfont">😼</span>
+        <br /><br />
+        <div class="tekst_header"><?php echo $taal['VISITORPROC_WUT'] ?? 'You are probably already registered.'; ?></div>
+        <div class="countdown-bar"><div class="countdown-progress"></div></div>
+        <a href="./index.php" class="done-btn">✓ <?php echo e($taal['Done'] ?? 'Done'); ?></a>
+    </div>
+</body>
+<?php else: ?>
+<body id="error">
+    <div class="result-box">
+        <span class="bigfont">🙀</span>
+        <br /><br />
+        <div class="tekst_header"><?php echo e($taal['DBERROR'] ?? 'An error occurred.'); ?></div>
+        <?php if (!empty($statusMessage)): ?>
+            <br /><span class="tekst_code"><?php echo e($statusMessage); ?></span>
+        <?php endif; ?>
+        <br><br>
+        <a href="./visitor_inn.php" class="done-btn">⬅️ <?php echo e($taal['Back'] ?? 'Back'); ?></a>
+    </div>
+</body>
+<?php endif; ?>
 </html>

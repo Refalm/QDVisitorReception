@@ -1,57 +1,37 @@
 <?php
-require_once("../configuration.php");
-require_once("sub/back.php");
-?><!DOCTYPE html>
-<html>
-<head>
-<title>QDVisitorReception</title>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="./style.css" />
-</head>
-<?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-	echo "<body id=\"context\">";
-	echo backurl(".");
-	include 'sub/logo.php';
-	
-	foreach ($_POST as $name => $value)
-	{
-		if ($whoemployees = $dbconnection->query("SELECT * FROM employee WHERE id = $name"))
-		{
-			
-			if (fnmatch("🔳*", $value))
-			{
-				
-				if($putonaway = $dbconnection->prepare("UPDATE employee SET present = 0 WHERE id = $name"))
-				{
-					$putonaway->execute();
-					$putonaway->close();
-				}
-			}
-			
-			if (fnmatch("🔲*", $value))
-			{
-				
-				if($putonpresent = $dbconnection->prepare("UPDATE employee SET present = 1 WHERE id = $name"))
-				{
-					$putonpresent->execute();
-					$putonpresent->close();
-				}
-			}
-		}
-	}
+require_once(__DIR__ . "/../configuration.php");
+require_once(__DIR__ . "/sub/back.php");
+require_once(__DIR__ . "/sub/taal.php");
 
-echo "<meta http-equiv=\"refresh\" content=\"0; URL=./employee.php\">";
-echo "</body>";
+// Verify auth
+if (empty($_SESSION['authenticated']) || empty($_SESSION['authenticated_time']) || (time() - $_SESSION['authenticated_time'] > 180)) {
+    unset($_SESSION['authenticated']);
+    unset($_SESSION['authenticated_time']);
+    header("Location: employee.php");
+    exit;
 }
+$_SESSION['authenticated_time'] = time();
 
-else
-{
-	echo "<body id=\"error\">";
-	echo backurl(".");
-	echo "<span class=\"bigfont\">😿</span>\n<br /><br /><span class=\"tekst_header\">Computer says no.</span>";
-	echo "</body>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? null)) {
+        header("Location: employee.php");
+        exit;
+    }
+
+    if (isset($_POST['employee_id']) && isset($_POST['action'])) {
+        $empId = (int)$_POST['employee_id'];
+        $newPresent = ($_POST['action'] === 'present') ? 1 : 0;
+        $stmt = $dbconnection->prepare("UPDATE employee SET present = ? WHERE id = ?");
+        if ($stmt) {
+            $stmt->bind_param("ii", $newPresent, $empId);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
+
+    header("Location: employee.php");
+    exit;
+} else {
+    header("Location: employee.php");
+    exit;
 }
-?>
-</html>

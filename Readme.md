@@ -51,6 +51,34 @@ Rename ```.env.dist``` to ```.env``` to create the configuration file.
 
 In ```.env```, change the MariaDB password called ```changeme```.
 
+### Timezone (TZ)
+
+In ```.env```, set the timezone for your organization's physical location:
+
+```ini
+TZ="Europe/Amsterdam"
+```
+
+This controls the exact arrival and departure timestamps recorded for visitors and displayed across the application and database.
+
+* For a full list of valid timezones, refer to:
+  * **[Official PHP Timezones](https://www.php.net/manual/en/timezones.php)**
+  * **[Wikipedia List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)**
+
+Common examples:
+* `Europe/Amsterdam`, `Europe/Brussels`, `Europe/Berlin`, `Europe/Paris`
+* `Europe/London`, `Europe/Dublin`
+* `America/New_York`, `America/Chicago`, `America/Los_Angeles`
+* `Asia/Tokyo`, `Australia/Sydney`, `UTC`
+
+### Retention period (days)
+
+In ```.env```, configure how many days visitor logs should be kept before automatic GDPR cleanup (default: `2` days):
+
+```ini
+RETENTION_DAYS="2"
+```
+
 ### Logo
 
 In ```.env``` you can set the name of the logo you wish to replace the placeholder with. You'll have to name, create, and insert the logo yourself in the public folder.
@@ -84,19 +112,29 @@ between the RequireAny tag.
 
 ## Install
 
-You can either use Docker or Classic LAMP.
+You can use Podman, Docker, or Classic LAMP.
 
-Which one will you choose?
+### Podman / Docker
 
-### Docker
-
-Just run
+Create your `.env` file:
 
 ```shell
-docker compose up
+cp .env.dist .env
 ```
 
-mate.
+Start the containers with Podman:
+
+```shell
+podman compose up --build
+```
+
+Or with Docker:
+
+```shell
+docker compose up --build
+```
+
+The application is accessible at `http://localhost:8080`.
 
 ### Classic LAMP
 
@@ -132,7 +170,7 @@ composer install
 
 ```shell
 sudo mysql < ./init.sql
-sudo mysql < echo "USE mysql; UPDATE user SET PASSWORD = PASSWORD('$MARIADB_PASSWORD') WHERE user = 'qdvr' AND host = '%'; FLUSH PRIVILEGES;"
+sudo mysql -e "ALTER USER 'qdvr'@'%' IDENTIFIED BY '$MARIADB_PASSWORD'; FLUSH PRIVILEGES;"
 ```
 
 #### Deployment

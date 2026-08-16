@@ -1,58 +1,30 @@
 <?php
-// <Language support>
-session_start();
-
-if(isSet($_GET['taal']))
-{
-	$taal = $_GET['taal'];
-
-	// register the session and set the cookie
-	$_SESSION['taal'] = $taal;
-
-	setcookie('taal', $taal, time() + (3600 * 24 * 30));
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-	else if(isSet($_SESSION['taal']))
-	{
-		$taal = $_SESSION['taal'];
-	}
-
-	else if(isSet($_COOKIE['taal']))
-	{
-		$taal = $_COOKIE['taal'];
-	}
-
-	else
-	{
-		$taal = 'en';
-	}
-
-switch ($taal)
-{
-	case 'en':
-		$taalbestand = 'en.php';
-		break;
-
-	case 'nl':
-		$taalbestand = 'nl.php';
-		break;
-
-	case 'fy':
-		$taalbestand = 'fy.php';
-		break;
-
-	case 'ie':
-		$taalbestand = 'ie.php';
-		break;
-
-	case 'de':
-		$taalbestand = 'de.php';
-		break;
-
-	default:
-		$taalbestand = 'en.php';
+if (isset($_GET['taal'])) {
+    $taalCode = (string)$_GET['taal'];
+    if (in_array($taalCode, ['en', 'nl', 'fy', 'ie'], true)) {
+        $_SESSION['taal'] = $taalCode;
+        setcookie('taal', $taalCode, [
+            'expires' => time() + (3600 * 24 * 30),
+            'path' => '/',
+            'samesite' => 'Lax',
+            'httponly' => false
+        ]);
+    }
 }
 
-include_once 'taal/'.$taalbestand;
-// </Language support>
-?>
+$selectedLang = $_SESSION['taal'] ?? $_COOKIE['taal'] ?? 'en';
+if (!in_array($selectedLang, ['en', 'nl', 'fy', 'ie'], true)) {
+    $selectedLang = 'en';
+}
+
+$taalFile = __DIR__ . '/../taal/' . $selectedLang . '.php';
+$taal = [];
+if (file_exists($taalFile)) {
+    include $taalFile;
+} else {
+    include __DIR__ . '/../taal/en.php';
+}
