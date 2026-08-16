@@ -7,12 +7,15 @@
         "vlucas/phpdotenv": "^5.6"
     },
     "require-dev": {
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1",
+        "vimeo/psalm": "^5.26 || ^6.0"
     },
     "scripts": {
         "stan": "phpstan analyse",
+        "psalm": "psalm --no-progress",
         "check": [
-            "@stan"
+            "@stan",
+            "@psalm"
         ]
     }
 }
